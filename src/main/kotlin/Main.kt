@@ -1,21 +1,34 @@
+import java.io.File
+
 fun main() {
 
   //  Autor: Carlos Tarrias Diaz
   //  Proyecto troncal M3 - Wordle
 
   //============DEFINICION E INICIALIZACION DEL ARRAY DE PALABRAS QUE TENDRA EL JUEGO
-  val dictionary = arrayOf (
-    "Actas", "Albas",
-    "Barra", "Bulos",
-    "Campo", "Casos",
-    "Dados", "Datos",
-    "Ocaso", "Espia",
-    "Falta", "Focos",
-    "Giros", "Gorra",
-    "Hijos", "Halos",
-    "Joyas", "Lagos",
-    "Magos", "Notas"
-  )
+
+  // DICICIONARIO BÁSICO
+//  val testWords: List<String>  = listOf<String>(
+//    "Actas", "Albas",
+//    "Barra", "Bulos",
+//    "Campo", "Casos",
+//    "Dados", "Datos",
+//    "Ocaso", "Espia",
+//    "Falta", "Focos",
+//    "Giros", "Gorra",
+//    "Hijos", "Halos",
+//    "Joyas", "Lagos",
+//    "Magos", "Notas"
+//  )
+
+  // ===============CARGA DE DICCIONARIO EXTERNO
+  val dictionary = ArrayList<String>()
+
+  val filePath = "src/main/kotlin/test1.txt"
+  val lines: List<String> = File(filePath).readLines()
+  lines.forEach { line -> dictionary.add(line) }
+  //dictionary.forEach{ println(it)} debug
+  //println(dictionary.size)
 
   //============DEFINICION E INICIALIZACIÓN DE LOS COLORES PARA LAS LETRAS (CODIGO ANSI)=========//
   val colourReset = "\u001B[0m"
@@ -87,7 +100,6 @@ fun main() {
         if (guessWord[i] == randomWord[i] && letterToCount.getValue(guessWord[i]) > 0){
           print("$colourGreen${guessWord[i]}$colourReset ")
           correctLetters++
-          //controlamos duplicidad del carácter
           letterToCount[guessWord[i]] = letterToCount.getValue(guessWord[i]) - 1
         }
         else if (guessWord[i] in randomWord && letterToCount.getValue(guessWord[i]) > 0) {
