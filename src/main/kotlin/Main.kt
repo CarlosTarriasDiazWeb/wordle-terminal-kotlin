@@ -7,7 +7,7 @@ fun main() {
 
   //============DEFINICION E INICIALIZACION DEL ARRAY DE PALABRAS QUE TENDRA EL JUEGO
 
-  // DICICIONARIO BÁSICO
+  // 1.DICICIONARIO BÁSICO
 //  val testWords: List<String>  = listOf<String>(
 //    "Actas", "Albas",
 //    "Barra", "Bulos",
@@ -21,14 +21,14 @@ fun main() {
 //    "Magos", "Notas"
 //  )
 
-  // ===============CARGA DE DICCIONARIO EXTERNO
+  // MEJORA: CARGA DE DICCIONARIO EXTERNO
   val dictionary = ArrayList<String>()
 
   val filePath = "src/main/kotlin/test1.txt"
   val lines: List<String> = File(filePath).readLines()
   lines.forEach { line -> dictionary.add(line) }
   //dictionary.forEach{ println(it)} debug
-  //println(dictionary.size)
+  //println(dictionary.size) debug
 
   //============DEFINICION E INICIALIZACIÓN DE LOS COLORES PARA LAS LETRAS (CODIGO ANSI)=========//
   val colourReset = "\u001B[0m"
@@ -36,13 +36,13 @@ fun main() {
   val colourYellow = "\u001B[33m"
 
   //================DEFINICION DE VARIABLES DE PARTIDA===============//
-  var numTries: Int
-  var playerWins: Boolean
-  var guessWord: String
-  var userLetter: String
-  var correctLetters: Int
-  var letterToCount = mutableMapOf<Char, Int>()
-  var userOption: Int
+  var numTries: Int //almacena el número de intentos, máximo 6.
+  var playerWins: Boolean //controla si el usuario gana la partida o no.
+  var guessWord: String //palabra que escribe el usuario en cada intento de la partida.
+  var userLetter: String //contiene la letra que compone guessWord
+  var correctLetters: Int //contador de letras correctas, las que se pintan en verde.
+  var letterToCount = mutableMapOf<Char, Int>() //diccionario de ocurrencias de cada carácter.
+  var userOption: Int //recoge si el usuario quiere seguir jugando o no.
   var randomIndex: Int
   var randomWord: String
 
@@ -62,8 +62,7 @@ fun main() {
       }
     }
 
-    println(letterToCount)//debug
-    println(randomWord) //debug
+    //println(randomWord) //debug
 
     //Reseteamos valores iniciales para la nueva partida.
     numTries = 0
@@ -79,17 +78,17 @@ fun main() {
       for (c in randomWord) {
         letterToCount[c] = randomWord.count{it == c}
       }
-      println(letterToCount) //debug
+      //println(letterToCount) //debug
       println("Te quedan ${6 - (numTries)} intentos")
       repeat(5) { index->
         println("Introduce la letra ${index + 1}")
         userLetter = readln().uppercase()
-        while (userLetter.isEmpty()){ //minetras el usuario no introduzca nada, vamos pidiendo la letra.
-          println("Tines que escribir algo...")
+        while (userLetter.isEmpty()){ //mientras el usuario no introduzca nada, vamos pidiendo la letra.
+          println("Tienes que escribir algo...")
           userLetter = readln().uppercase()
         }
-        if (userLetter.length > 1) { //para controlar que sólo re recoja un solo carácter cada vez que se lo pedimos al usuario.
-          println("Has introducido mas de un carácter. Se recogerá solo el primero.")
+        if (userLetter.length > 1) { //para controlar que sólo se recoja un solo carácter cada vez que se lo pedimos al usuario.
+          println("Has introducido más de un carácter. Se recogerá sólo el primero.")
           userLetter = userLetter.slice(0..0)
         }
         println("Ha introducido la letra $userLetter")
@@ -100,6 +99,7 @@ fun main() {
         if (guessWord[i] == randomWord[i] && letterToCount.getValue(guessWord[i]) > 0){
           print("$colourGreen${guessWord[i]}$colourReset ")
           correctLetters++
+          //controlamos duplicidad del carácter
           letterToCount[guessWord[i]] = letterToCount.getValue(guessWord[i]) - 1
         }
         else if (guessWord[i] in randomWord && letterToCount.getValue(guessWord[i]) > 0) {
@@ -121,10 +121,13 @@ fun main() {
         numTries++
         if (numTries == 6) {
           println("Una pena, no has acertado la palabra...")
+          println("La palabra era: $randomWord")
         }
       }
       println("=================================")
     }while(numTries < 6 && !playerWins) //seguimos intentando mientras no adivinemos la palabra y no hayamos superado el número máximo de intentos.
+    //Limpiamos diccionario de ocurrencias
+    letterToCount = mutableMapOf()
     println("Quieres hacer otra partida?")
     println("SI --> Pulsa 1")
     println("NO --> Pulsa 2")
