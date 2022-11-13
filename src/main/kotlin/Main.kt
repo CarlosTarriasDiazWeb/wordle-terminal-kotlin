@@ -5,9 +5,19 @@ fun main() {
   //  Autor: Carlos Tarrias Diaz
   //  Proyecto troncal M3 - Wordle
 
+  // DESCRIPCIÓN DEL JUEGO
+  /*
+    El joc consisteix en endevinar una paraula concreta de cinc lletres en un màxim de sis intents.
+    El jugador tindrà 6 intents per endevinar la paraula (la paraula pot estar formada en cada posició per totes les lletres de l'abecedari),
+    en cas contrari haurà perdut la partida.
+    S’ha d’anar mostrant, en tot moment, quines lletres s’han encertat en la posició, o s’han encertat, però no estan al lloc adient.
+    Al joc original ho mostra en color verd i groc respectivament.
+    El jugador al final de la partida pot decidir si vol jugar una altra o no.
+   */
+
   //============DEFINICION E INICIALIZACION DEL ARRAY DE PALABRAS QUE TENDRA EL JUEGO
 
-  // 1.DICICIONARIO BÁSICO
+  // 1.DICICIONARIO BÁSICO // YA NO SE USA
 //  val testWords: List<String>  = listOf<String>(
 //    "Actas", "Albas",
 //    "Barra", "Bulos",
@@ -21,7 +31,7 @@ fun main() {
 //    "Magos", "Notas"
 //  )
 
-  // MEJORA: CARGA DE DICCIONARIO EXTERNO
+  // 2.MEJORA: CARGA DE DICCIONARIO EXTERNO
   val dictionary = ArrayList<String>()
 
   val filePath = "src/main/kotlin/test1.txt"
