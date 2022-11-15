@@ -44,6 +44,7 @@ fun main() {
   val colourReset = "\u001B[0m"
   val colourGreen = "\u001B[32m"
   val colourYellow = "\u001B[33m"
+  val bgColourWhite = "\u001b[47m" //Per pintar els blocs en l'historial de mitjanes d'intents.
 
   //================DEFINICION DE VARIABLES DE PARTIDA===============//
   var numTries: Int //almacena el número de intentos, máximo 6.
@@ -56,11 +57,26 @@ fun main() {
   var randomIndex: Int
   var randomWord: String
 
+  //Nuevas variables de la actualización del juego
+  var continuousGuessedWords = 0 //recoge la racha actual de palabras acertadas seguidas.
+  var bestContinuousGuessedWords = 0 //recoge la mejor racha de palabras acertadas seguidas.
+  var numberOfTotalGuessedWords = 0 //recoge el número de palabras acertadas respecto al total.
+  var wordsPercentage: Double //porcentaje de palabras acertadas respecto al total.
+  var currentNumberOfplays = 0 //recoge el numero total de partidas jugadas hasta el momento.
+  val medianOfTries = DoubleArray(6){0.0} //array que recoge la media de intento del total de partidas
+  val numOfTriesAccomulate = IntArray(6){0} //array que en cada posicion i-1 el total de palabras que se han acertado con i intentos
+
   //Aqui empieza bucle principal del juego.
   do {
-    //Escogemos la palabra del diccionario a partir del indice aleatorio.
-    randomIndex = dictionary.indices.random()
-    randomWord = dictionary[randomIndex].uppercase()
+    //Vamos seleccionando la palabra del diccionario a partir del indice aleatorio hasta que seleccionemos una que no esté vacía.
+    do {
+      //Escogemos la palabra del diccionario a partir del indice aleatorio.
+      randomIndex = dictionary.indices.random()
+      randomWord = dictionary[randomIndex].uppercase()
+    }while(randomWord.isEmpty())
+
+    //Eliminamos la palabra marcándola como vacía en el diccionario para que no vuelva a salir.
+    dictionary[randomIndex] = ""
 
     //Creamos diccionario con ocurrencias de cada carácter para ver aquellos duplicados en cada intento.
     for (c in randomWord) {
@@ -72,7 +88,7 @@ fun main() {
       }
     }
 
-    //println(randomWord) //debug
+   // println(randomWord) //debug
 
     //Reseteamos valores iniciales para la nueva partida.
     numTries = 0
@@ -121,23 +137,62 @@ fun main() {
           print("${guessWord[i]} ")
         }
       }
+      numTries++
       if (correctLetters == 5) {
         playerWins = true
         println("Enhorabuena has ganado!")
+        //incrementamos el contador de la racha actual y el contador de palabras acertadas
+        continuousGuessedWords++
+        numberOfTotalGuessedWords++
+        if (continuousGuessedWords > bestContinuousGuessedWords) bestContinuousGuessedWords = continuousGuessedWords
         //Limpiamos diccionario de ocurrencias
         letterToCount = mutableMapOf()
       }
       else {
-        numTries++
         if (numTries == 6) {
           println("Una pena, no has acertado la palabra...")
           println("La palabra era: $randomWord")
+          //reseteamos a 0 la racha porque hemos fallado
+          continuousGuessedWords = 0
+          println("Has perdido la racha...")
         }
       }
+
       println("=================================")
     }while(numTries < 6 && !playerWins) //seguimos intentando mientras no adivinemos la palabra y no hayamos superado el número máximo de intentos.
+    currentNumberOfplays++
     //Limpiamos diccionario de ocurrencias
     letterToCount = mutableMapOf()
+
+    wordsPercentage = (numberOfTotalGuessedWords/109.0)*100.0
+    println("===============MOSTRANDO ESTADÍSTICA=============")
+    println("HAS RESUELTO UN TOTAL DE $numberOfTotalGuessedWords PALABRAS")
+    println("PORCENTAJE DE PALABRAS RESUELTAS DEL DICCIONARIO ${String.format("%.2f", wordsPercentage)}%")
+    println("TE QUEDAN POR RESOLVER ${109-numberOfTotalGuessedWords} PALABRAS")
+    println("TU RACHA ACTUAL ES DE : $continuousGuessedWords PALABRAS")
+    println("TU MEJOR RACHA ES DE : $bestContinuousGuessedWords PALABRAS")
+    println("**Mostrando media de intentos**")
+
+    //Si el jugador ha adivinado la palabra actualizamos el contador de intentos correspondiente a la partida y actualizamos los valores de las medias
+    if (playerWins) {
+      numOfTriesAccomulate[numTries - 1]++
+      //media = numero de veces que ha acertado la palabra en el intento num X / numero total de partidas jugadas
+      var partialResult = 0.0
+      for (i in medianOfTries.indices) {
+        partialResult = numOfTriesAccomulate[i].toDouble()/currentNumberOfplays.toDouble()
+        medianOfTries[i] = partialResult*100.0
+      }
+    }
+    //mostramos barra de estadísticas de las medias
+    for (i in medianOfTries.indices) {
+      print("${i+1}: ")
+      repeat(numOfTriesAccomulate[i]) {
+        print("$bgColourWhite ")
+      }
+      print(" $colourReset (${String.format("%.1f",medianOfTries[i])}%)")
+      println("")
+    }
+    println("====================FIN ESTADÍSTICAS=================")
     println("Quieres hacer otra partida?")
     println("SI --> Pulsa 1")
     println("NO --> Pulsa 2")

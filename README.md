@@ -1,6 +1,6 @@
 # Projecte Troncal M3 : Wordle
 ## Autors
-- [Carlos Tarrias Diaz](https://gitlab.com/carlos.tarrias.7e6)   
+- [Carlos Tarrias Diaz](https://gitlab.com/carlos.tarrias.7e6)
 
 ## Index
 - [Objectiu](#objectiu) 
@@ -45,3 +45,25 @@ totes les lletres de l’abecedari i sense possibilitat de repetició.
 - **Joc Multipartida**:
   - S'ha afegit un bucle extern per permetre que el jugador pugui jugar una altra partida amb una altra paraula
   aleatòria que hi hagi al fitxer extern, si així ho desitja.
+- **Estadísitica del joc**:
+  - Al final de cada partida el joc ens mostra:
+    - La quantitat de paraules resoltes : s'ha utilitzat una variable que va incrementant cada vegada que el jugador 
+    encerta una paraula del diccionari.
+    - La quantitat de paraules no resoltes : correspon al total de paraules del diccionario (109) menys el número de paraules
+    encertades.
+    - El percentatge de paraules que resolem : es calcula a partir del total de paraules del diccionari.
+    - Mitjana d'intents:
+      - S'ha creat un array que en cada posició _i-1_ té el numero de vegades que ha encertant la paraula
+      en el intent _i_ .
+      - S'ha creat un array que en cada posicio _i_ conté la mitjà del intent _i_ calculada a partir del número de partides
+      jugades.
+      - A partir d'un codi de color ANSI s'ha creat una gràfic que indica de manera visual les
+      mitjanes d'intents al jugador després de cada partida. Mostrant al final els percentatges emmagatzemats
+      al array de mitjes.
+    - Millor ratxa de paraules encertades:
+      - Hem anant incrementant una variable cada vegada que el jugador guanyava i en una altra variable 
+      hem emmagatzemat la ratxa màxima que s'anava substituïnt per la ratxa actual només si aquesta 
+      era major.
+    - Control de paraules del diccionari
+      - A mesura que escolliem una paraula nova, al diccionari la marcàvem com a buida ("") per indicar
+      que no la tornariem a escollir en una altra partida.
