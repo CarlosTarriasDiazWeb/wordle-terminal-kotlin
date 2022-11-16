@@ -50,10 +50,10 @@ fun main() {
   var numTries: Int //almacena el número de intentos, máximo 6.
   var playerWins: Boolean //controla si el usuario gana la partida o no.
   var guessWord: String //palabra que escribe el usuario en cada intento de la partida.
-  var userLetter: String //contiene la letra que compone guessWord
+  var userLetter: String //contiene la letra que compone guessWord.
   var correctLetters: Int //contador de letras correctas, las que se pintan en verde.
   var letterToCount = mutableMapOf<Char, Int>() //diccionario de ocurrencias de cada carácter.
-  var userOption: Int //recoge si el usuario quiere seguir jugando o no.
+  var userOption: Int = -1 //recoge si el usuario quiere seguir jugando o no.
   var randomIndex: Int
   var randomWord: String
 
@@ -62,9 +62,10 @@ fun main() {
   var bestContinuousGuessedWords = 0 //recoge la mejor racha de palabras acertadas seguidas.
   var numberOfTotalGuessedWords = 0 //recoge el número de palabras acertadas respecto al total.
   var wordsPercentage: Double //porcentaje de palabras acertadas respecto al total.
-  var currentNumberOfplays = 0 //recoge el numero total de partidas jugadas hasta el momento.
-  val medianOfTries = DoubleArray(6){0.0} //array que recoge la media de intento del total de partidas
-  val numOfTriesAccomulate = IntArray(6){0} //array que en cada posicion i-1 el total de palabras que se han acertado con i intentos
+  var currentNumberOfPlays = 0 //recoge el numero total de partidas jugadas.
+  val medianOfTries = DoubleArray(6){0.0} //array que recoge la media de intento del total de partidas.
+  val numOfTriesAccomulate = IntArray(6){0} //array que en cada posicion i-1 el total de palabras que se han acertado con i intentos.
+  var totalWords = 109 //recoge el total de palabras totales que se podrán adivinar en el juego. Cada palabra sólo puede salir una sola vez.
 
   //Aqui empieza bucle principal del juego.
   do {
@@ -75,8 +76,12 @@ fun main() {
       randomWord = dictionary[randomIndex].uppercase()
     }while(randomWord.isEmpty())
 
+
     //Eliminamos la palabra marcándola como vacía en el diccionario para que no vuelva a salir.
     dictionary[randomIndex] = ""
+
+    //Disminuimos el número total de palabras del juego.
+    totalWords--
 
     //Creamos diccionario con ocurrencias de cada carácter para ver aquellos duplicados en cada intento.
     for (c in randomWord) {
@@ -88,7 +93,7 @@ fun main() {
       }
     }
 
-   // println(randomWord) //debug
+    // println(randomWord) //debug
 
     //Reseteamos valores iniciales para la nueva partida.
     numTries = 0
@@ -138,7 +143,7 @@ fun main() {
         }
       }
       numTries++
-      if (correctLetters == 5) {
+      if (correctLetters == 5) { // El jugador ha acertado la palabra.
         playerWins = true
         println("Enhorabuena has ganado!")
         //incrementamos el contador de la racha actual y el contador de palabras acertadas
@@ -148,7 +153,7 @@ fun main() {
         //Limpiamos diccionario de ocurrencias
         letterToCount = mutableMapOf()
       }
-      else {
+      else { //El jugador no acierta la palabra.
         if (numTries == 6) {
           println("Una pena, no has acertado la palabra...")
           println("La palabra era: $randomWord")
@@ -160,15 +165,19 @@ fun main() {
 
       println("=================================")
     }while(numTries < 6 && !playerWins) //seguimos intentando mientras no adivinemos la palabra y no hayamos superado el número máximo de intentos.
-    currentNumberOfplays++
+
+    //actaulizamos el número de partidas ganadas.
+    currentNumberOfPlays++
+
     //Limpiamos diccionario de ocurrencias
     letterToCount = mutableMapOf()
 
     wordsPercentage = (numberOfTotalGuessedWords/109.0)*100.0
     println("===============MOSTRANDO ESTADÍSTICA=============")
+    println("PARTIDAS JUGADAS: $currentNumberOfPlays")
     println("HAS RESUELTO UN TOTAL DE $numberOfTotalGuessedWords PALABRAS")
     println("PORCENTAJE DE PALABRAS RESUELTAS DEL DICCIONARIO ${String.format("%.2f", wordsPercentage)}%")
-    println("TE QUEDAN POR RESOLVER ${109-numberOfTotalGuessedWords} PALABRAS")
+    println("TODAVÍA PUEDES RESOLVER $totalWords PALABRAS")
     println("TU RACHA ACTUAL ES DE : $continuousGuessedWords PALABRAS")
     println("TU MEJOR RACHA ES DE : $bestContinuousGuessedWords PALABRAS")
     println("**Mostrando media de intentos**")
@@ -176,11 +185,14 @@ fun main() {
     //Si el jugador ha adivinado la palabra actualizamos el contador de intentos correspondiente a la partida y actualizamos los valores de las medias
     if (playerWins) {
       numOfTriesAccomulate[numTries - 1]++
-      //media = numero de veces que ha acertado la palabra en el intento num X / numero total de partidas jugadas
+      //Fórmula: media = numero de veces que ha acertado la palabra en el intento num X / numero total de partidas jugadas
       var partialResult = 0.0
-      for (i in medianOfTries.indices) {
-        partialResult = numOfTriesAccomulate[i].toDouble()/currentNumberOfplays.toDouble()
-        medianOfTries[i] = partialResult*100.0
+      //Calculamos la estadísitica de medias sólo si ha conseguido acertar como mínimo una palabra.
+      if (numberOfTotalGuessedWords > 0) {
+        for (i in medianOfTries.indices) {
+          partialResult = numOfTriesAccomulate[i].toDouble()/numberOfTotalGuessedWords.toDouble()
+          medianOfTries[i] = partialResult*100.0
+        }
       }
     }
     //mostramos barra de estadísticas de las medias
@@ -193,17 +205,23 @@ fun main() {
       println("")
     }
     println("====================FIN ESTADÍSTICAS=================")
-    println("Quieres hacer otra partida?")
-    println("SI --> Pulsa 1")
-    println("NO --> Pulsa 2")
-    userOption = readln().toInt()
-    while (userOption < 1 || userOption > 2) { //mientras la opción no sea correcta, vamos pidiéndole el input correcto al usuario.
-      println("Opción no válida")
+
+    if (totalWords == 0) { //Comprobamos si el jugador ha jugado tanto que ya no quedan palabras para jugar en el juego
+      println("Se han acabado todas la palabras disponibles. Gracias por jugar tanto.")
+    }
+    else { //Sólo tiene sentido preguntar al jugador si quiere seguir jugando mientras haya palabras disponibles
+      println("Quieres hacer otra partida?")
       println("SI --> Pulsa 1")
       println("NO --> Pulsa 2")
       userOption = readln().toInt()
+      while (userOption < 1 || userOption > 2) { //mientras la opción no sea correcta, vamos pidiéndole el input correcto al usuario.
+        println("Opción no válida")
+        println("SI --> Pulsa 1")
+        println("NO --> Pulsa 2")
+        userOption = readln().toInt()
+      }
     }
-  }while(userOption == 1) //seguimos jugando mientras el jugador así lo indique.
-  println("Apagando WORDLE...")
+  }while(userOption == 1 && totalWords > 0) //seguimos jugando mientras el jugador así lo indique.
 
+  println("Apagando WORDLE...")
 }

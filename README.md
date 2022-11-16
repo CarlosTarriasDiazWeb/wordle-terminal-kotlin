@@ -56,10 +56,10 @@ totes les lletres de l’abecedari i sense possibilitat de repetició.
       - S'ha creat un array que en cada posició _i-1_ té el numero de vegades que ha encertant la paraula
       en el intent _i_ .
       - S'ha creat un array que en cada posicio _i_ conté la mitjà del intent _i_ calculada a partir del número de partides
-      jugades.
+      jugades on s'ha encertat la paraula.
       - A partir d'un codi de color ANSI s'ha creat una gràfic que indica de manera visual les
       mitjanes d'intents al jugador després de cada partida. Mostrant al final els percentatges emmagatzemats
-      al array de mitjes.
+      al array de mitjes. S'ha corretgit que es faci la mitjà respecte al nombre de paraules encertades.
     - Millor ratxa de paraules encertades:
       - Hem anant incrementant una variable cada vegada que el jugador guanyava i en una altra variable 
       hem emmagatzemat la ratxa màxima que s'anava substituïnt per la ratxa actual només si aquesta 
@@ -67,3 +67,5 @@ totes les lletres de l’abecedari i sense possibilitat de repetició.
     - Control de paraules del diccionari
       - A mesura que escolliem una paraula nova, al diccionari la marcàvem com a buida ("") per indicar
       que no la tornariem a escollir en una altra partida.
+      - Tenim una variable on controlem les paraules disponibles restants al diccionari cada vegada, 
+      que decrementem que en selccionem una.
