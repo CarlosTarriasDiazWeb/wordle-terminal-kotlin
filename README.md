@@ -35,7 +35,7 @@ totes les lletres de l’abecedari i sense possibilitat de repetició.
     (quan hauria de ser verd).
 - **Pintar els caràcters**: 
   - S'utilitza el codi ANSI dels colors verd  `\u001B[32m`
-    i groc `\u001B[33m` al mostrar el resultat en cada intent.  
+    i groc `\u001B[33m` en els respectius caràcters al mostrar el resultat en cada intent.  
   - En cada intent, s'itera per la paraula introduïda pel jugador i per cada caràcter:
     1. Si queden ocurrències al diccionari generat per aquella paraula:
        1. Si el caràcter està a la paraula i en la mateixa posició que en la paraula correcta, el caràcter es pinta de verd. 
@@ -44,8 +44,9 @@ totes les lletres de l’abecedari i sense possibilitat de repetició.
     2. Si el número de ocurrències és 0, es pinta de gris. 
 - **Joc Multipartida**:
   - S'ha afegit un bucle extern per permetre que el jugador pugui jugar una altra partida amb una altra paraula
-  aleatòria que hi hagi al fitxer extern, si així ho desitja.
-- **Estadísitica del joc**:
+  aleatòria que hi hagi al fitxer extern, si així ho desitja. Ara hem tingut en compte el nombre paraules restants al diccionari
+  de joc, de manera que si no en queden, el joc termina automàticament.
+- **Estadística del joc**:
   - Al final de cada partida el joc ens mostra:
     - La quantitat de paraules resoltes : s'ha utilitzat una variable que va incrementant cada vegada que el jugador 
     encerta una paraula del diccionari.
@@ -53,19 +54,21 @@ totes les lletres de l’abecedari i sense possibilitat de repetició.
     encertades.
     - El percentatge de paraules que resolem : es calcula a partir del total de paraules del diccionari.
     - Mitjana d'intents:
-      - S'ha creat un array que en cada posició _i-1_ té el numero de vegades que ha encertant la paraula
+      - S'ha creat un array estàtic que en cada posició _i-1_ té el numero de vegades que ha encertant la paraula
       en el intent _i_ .
-      - S'ha creat un array que en cada posicio _i_ conté la mitjà del intent _i_ calculada a partir del número de partides
+      - S'ha creat un array estàtic que en cada posicio _i_ conté la mitjà del intent _i_ calculada a partir del número de partides
       jugades on s'ha encertat la paraula.
-      - A partir d'un codi de color ANSI s'ha creat una gràfic que indica de manera visual les
+      - A partir del codi ANSI pel color blanc `\u001b[47m` s'ha creat una gràfic que indica de manera visual les
       mitjanes d'intents al jugador després de cada partida. Mostrant al final els percentatges emmagatzemats
-      al array de mitjes. S'ha corretgit que es faci la mitjà respecte al nombre de paraules encertades.
+      al array de mitjes. S'ha corretgit que es faci la mitjà respecte al nombre de paraules encertades i que només la faci
+      quan el jugador a encertat almenys 1 paraula.
     - Millor ratxa de paraules encertades:
-      - Hem anant incrementant una variable cada vegada que el jugador guanyava i en una altra variable 
+      - Hem anat incrementant una variable cada vegada que el jugador guanyava i en una altra variable 
       hem emmagatzemat la ratxa màxima que s'anava substituïnt per la ratxa actual només si aquesta 
       era major.
     - Control de paraules del diccionari
       - A mesura que escolliem una paraula nova, al diccionari la marcàvem com a buida ("") per indicar
-      que no la tornariem a escollir en una altra partida.
-      - Tenim una variable on controlem les paraules disponibles restants al diccionari cada vegada, 
-      que decrementem que en selccionem una.
+      que no la tornariem a escollir en una altra partida. Com que tenim en compte les paraules restants al diccionari,
+      evitem que el bucle de cerca de la paraula aleatòria es faci infinit.
+      - Tenim una variable on controlem les paraules disponibles restants al diccionari. Decrementem aquest 
+      comptador de paraules restants cada vegada que el jugador termina una partida.
