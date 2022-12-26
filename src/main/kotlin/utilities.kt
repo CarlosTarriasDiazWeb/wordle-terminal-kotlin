@@ -26,12 +26,14 @@ fun getRandomWord(dictionary: ArrayList<String>): String = dictionary[dictionary
  * @param randomWord String: Paraula aleatòria seleccionada de la partida actual.
  */
 fun setLetterToCount(letterToCount:MutableMap<Char,Int>, randomWord: String) {
-  for (c in randomWord) {
-    if (!letterToCount.containsKey(c)) {
-      letterToCount[c] = 1
-    }
-    else {
-      letterToCount[c] = letterToCount.getValue(c) + 1
+  if (randomWord.length == 5) {
+    for (c in randomWord) {
+      if (!letterToCount.containsKey(c)) {
+        letterToCount[c] = 1
+      }
+      else {
+        letterToCount[c] = letterToCount.getValue(c) + 1
+      }
     }
   }
 }
@@ -132,15 +134,17 @@ fun showGameStatistics(currentNumberOfPlays: Int,
  * @param numberOfTotalGuessedWords Int : Nombre de paraules encertades.
  */
 fun calculateGameHistogram(medianOfTries: DoubleArray, numOfTriesAccomulate: IntArray, numTries: Int, numberOfTotalGuessedWords: Int) {
-  numOfTriesAccomulate[numTries - 1]++
-  //Fórmula: media = nombre de vegades que ha encertat la paraula en l'intent num X / nombre total de partides jugades
-  var partialResult = 0.0
+  if (numTries > 0) {
+    numOfTriesAccomulate[numTries - 1]++
+    //Fórmula: media = nombre de vegades que ha encertat la paraula en l'intent num X / nombre total de partides jugades
+    var partialResult = 0.0
 
-  //Calculem l'estadísitica de mitges només si ha aconseguit encertar com a mínim una paraula.
-  if (numberOfTotalGuessedWords > 0) {
-    for (i in medianOfTries.indices) {
-      partialResult = numOfTriesAccomulate[i].toDouble()/numberOfTotalGuessedWords.toDouble()
-      medianOfTries[i] = partialResult*100.0
+    //Calculem l'estadísitica de mitges només si ha aconseguit encertar com a mínim una paraula.
+    if (numberOfTotalGuessedWords > 0) {
+      for (i in medianOfTries.indices) {
+        partialResult = numOfTriesAccomulate[i].toDouble()/numberOfTotalGuessedWords.toDouble()
+        medianOfTries[i] = partialResult*100.0
+      }
     }
   }
 }
