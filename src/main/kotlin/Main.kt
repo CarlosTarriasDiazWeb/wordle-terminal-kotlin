@@ -1,54 +1,25 @@
+//  Autor: Carlos Tarrias Diaz
+//  Projecte troncal M3 - Wordle
+
+// DESCRIPCIÓ DEL JOC
+/*
+  El joc consisteix en endevinar una paraula concreta de cinc lletres en un màxim de sis intents.
+  El jugador tindrà 6 intents per endevinar la paraula (la paraula pot estar formada en cada posició per totes les lletres de l'abecedari),
+  en cas contrari haurà perdut la partida.
+  S’ha d’anar mostrant, en tot moment, quines lletres s’han encertat en la posició, o s’han encertat, però no estan al lloc adient.
+  Al joc original ho mostra en color verd i groc respectivament.
+  El jugador al final de la partida pot decidir si vol jugar una altra o no.
+ */
+
+/**
+ * Punt d'entrada del programa.
+ */
 fun main() {
 
-  //  Autor: Carlos Tarrias Diaz
-  //  Projecte troncal M3 - Wordle
-
-  // DESCRIPCIÓ DEL JOC
-  /*
-    El joc consisteix en endevinar una paraula concreta de cinc lletres en un màxim de sis intents.
-    El jugador tindrà 6 intents per endevinar la paraula (la paraula pot estar formada en cada posició per totes les lletres de l'abecedari),
-    en cas contrari haurà perdut la partida.
-    S’ha d’anar mostrant, en tot moment, quines lletres s’han encertat en la posició, o s’han encertat, però no estan al lloc adient.
-    Al joc original ho mostra en color verd i groc respectivament.
-    El jugador al final de la partida pot decidir si vol jugar una altra o no.
-   */
-
   //============Array de paraules que tindrá el joc=======//
-
   // Càrrega de diccionari mitjançant fitxer
   val dictionary = ArrayList<String>()
   loadFile("test1.txt", dictionary)
-
-//  dictionary.forEach{ println(it)}
-//  println(dictionary.size)
-
-  //============Colors de les lletres (codi ANSI)==========//
-  val colors = mutableMapOf(
-    "reset" to "\u001B[0m",
-    "green" to "\u001B[32m",
-    "yellow" to "\u001B[33m",
-    "white" to "\u001b[47m" //Per pintar els blocs en l'historial de mitjanes d'intents.
-  )
-
-  //================Variables de la partida===============//
-  //Variables per controlar estat de la partida.
-  var numTries: Int //almacena el número de intentos, máximo 6.
-  var playerWins: Boolean //controla si el usuario gana la partida o no.
-  var guessWord: String //palabra que escribe el usuario en cada intento de la partida.
-  var correctLetters: Int //contador de letras correctas, las que se pintan en verde.
-  val letterToCount = mutableMapOf<Char, Int>() //diccionario de ocurrencias de cada carácter.
-  var userOption: Int = -1 //recoge si el usuario quiere seguir jugando o no.
-  var randomWord: String
-
-  //Variables per calcular les estadístiques del joc.
-  var continuousGuessedWords = 0 //recoge la racha actual de palabras acertadas seguidas.
-  var bestContinuousGuessedWords = 0 //recoge la mejor racha de palabras acertadas seguidas.
-  var numberOfTotalGuessedWords = 0 //recoge el número de palabras acertadas respecto al total.
-  var wordsPercentage: Double //porcentaje de palabras acertadas respecto al total.
-  var currentNumberOfPlays = 0 //recoge el numero total de partidas jugadas.
-  val medianOfTries = DoubleArray(6){0.0} //array que recoge la media de intento del total de partidas.
-  val numOfTriesAccomulate = IntArray(6){0} //array que en cada posicion i-1 el total de palabras que se han acertado con i intentos.
-  var totalWords = 109 //recoge el total de palabras totales que se podrán adivinar en el juego. Cada palabra sólo puede salir una sola vez.
 
   //Bucle principal del joc
   do {
@@ -91,6 +62,7 @@ fun main() {
       numTries++
 
       playerWins = playerWins(correctLetters)
+
       if (playerWins) {
         println("Enhorabuena has ganado!")
 
@@ -104,11 +76,9 @@ fun main() {
       }
       else {
         if (numTries == 6) {
-          println("Una pena, no has acertado la palabra...")
-          println("La palabra era: $randomWord")
           //Reiniciem la ratxa d eparaules encertades.
           continuousGuessedWords = 0
-          println("Has perdido la racha...")
+          printLoseMessage(randomWord)
         }
       }
       println("=================================")

@@ -8,8 +8,11 @@ import java.io.File
 fun loadFile(fileName: String, dictionary: ArrayList<String>) {
   if (fileName.isNotEmpty()) {
     val path = "src/main/kotlin/$fileName"
-    val lines: List<String> = File(path).readLines()
-    lines.forEach { line -> dictionary.add(line) }
+    val file = File(path)
+    if (file.isFile && file.exists()) {
+      val lines: List<String> = file.readLines()
+      lines.forEach { line -> dictionary.add(line) }
+    }
   }
 }
 
@@ -103,31 +106,6 @@ fun printWord(guessWord: String, randomWord: String, letterToCount: MutableMap<C
 fun playerWins(correctLetters: Int) : Boolean = correctLetters == 5
 
 /**
- * Mostra per terminal les estadístiques finals del joc al acabar la partida.
- * @param currentNumberOfPlays Int : Partides jugades per l'usuari.
- * @param numberOfTotalGuessedWords Int : Nombre de paraules encertades.
- * @param wordsPercentage Double: Percentatge de paraules encertades.
- * @param totalWords Int : Nombre de paraules que queden per encertar.
- * @param continuousGuessedWords Int: Ratxa de paraules encertades.
- * @param bestContinuousGuessedWords Int: Millor ratxa d'encerts.
- */
-fun showGameStatistics(currentNumberOfPlays: Int,
-                       numberOfTotalGuessedWords:Int,
-                       wordsPercentage:Double,
-                       totalWords:Int,
-                       continuousGuessedWords:Int,
-                       bestContinuousGuessedWords:Int) {
-  println("===============MOSTRANDO ESTADÍSTICA=============")
-  println("PARTIDAS JUGADAS: $currentNumberOfPlays")
-  println("HAS RESUELTO UN TOTAL DE $numberOfTotalGuessedWords PALABRAS")
-  println("PORCENTAJE DE PALABRAS RESUELTAS DEL DICCIONARIO ${String.format("%.2f", wordsPercentage)}%") //mostrem el percentatge amb dos decimals de precisió.
-  println("TODAVÍA PUEDES RESOLVER $totalWords PALABRAS")
-  println("TU RACHA ACTUAL ES DE : $continuousGuessedWords PALABRAS")
-  println("TU MEJOR RACHA ES DE : $bestContinuousGuessedWords PALABRAS")
-  println("**Mostrando media de intentos**")
-}
-
-/**
  * @param medianOfTries DoubleArray: Emmagatzema la mitjana d'intents de tot el joc.
  * @param numOfTriesAccomulate IntArray: Emmagatzema el total de paraules que s'han encertat per 1..6 intents respectivament.
  * @param numTries Int: Nombre d'intents que ha necessitat el jugador per encertar la paraula.
@@ -147,23 +125,6 @@ fun calculateGameHistogram(medianOfTries: DoubleArray, numOfTriesAccomulate: Int
       }
     }
   }
-}
-/**
- * Mostra les barres d'estadístiques de les mitjanes d'intents de les paraules encertades
- * @param medianOfTries DoubleArray: Emmagatzema la mitjana d'intents de tot el joc.
- * @param numOfTriesAccomulate IntArray: Emmagatzema el total de paraules que s'han encertat per 1..6 intents.
- * @param colors MutableMap<String, String>: Conté els colors que amb què es pintarà l'histograma.
- */
-fun showGameHistogram(medianOfTries: DoubleArray, numOfTriesAccomulate: IntArray, colors: MutableMap<String, String>) {
-  for (i in medianOfTries.indices) {
-    print("${i+1}: ")
-    repeat(numOfTriesAccomulate[i]) {
-      print("${colors["white"]} ")
-    }
-    print(" ${colors["reset"]} (${String.format("%.1f",medianOfTries[i])}%)") //mostrem el percentatge amb un decimal de precisió.
-    println("")
-  }
-  println("====================FIN ESTADÍSTICAS=================")
 }
 
 /**
