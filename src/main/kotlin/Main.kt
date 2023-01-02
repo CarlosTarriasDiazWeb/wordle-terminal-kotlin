@@ -1,3 +1,6 @@
+import java.util.*
+import kotlin.collections.ArrayList
+
 //  Autor: Carlos Tarrias Diaz
 //  Projecte troncal M3 - Wordle
 
@@ -29,7 +32,8 @@ fun main() {
     }while(randomWord.isEmpty()) //Anem seleccionant una paraula del diccionari fins que escollim una que no està buïda.
 
     //Marquem la paraula com a buïda per no tornar a seleccionar-la
-    dictionary[dictionary.indexOf(randomWord.lowercase().capitalize())] = "" //transformem paraula per a que coincideixi exactament.
+    dictionary[dictionary.indexOf(randomWord.lowercase()
+      .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })] = "" //Capitalitzem la paraula per a que coincideixi exactament amb el format de les paraules en el arxiu de lectura.
 
     //Disminuim el nombre total de paraules del joc.
     totalWords--
@@ -37,7 +41,7 @@ fun main() {
     //Creem diccionari amb ocurrències de cada caràcter per veure els que estan duplicats en cada intent.
     setLetterToCount(letterToCount, randomWord)
 
-    println(randomWord) //debug
+    //println(randomWord) //debug
 
     //Setejem intents inicials per a la nova partida.
     numTries = 0
@@ -51,7 +55,7 @@ fun main() {
         letterToCount[c] = randomWord.count{it == c}
       }
 
-      println(letterToCount) //debug
+      //println(letterToCount) //debug
 
       println("Te quedan ${6 - (numTries)} intentos")
 
@@ -100,7 +104,7 @@ fun main() {
       calculateGameHistogram(medianOfTries, numOfTriesAccomulate, numTries, numberOfTotalGuessedWords)
     }
 
-    showGameHistogram(medianOfTries, numOfTriesAccomulate, colors)
+    showGameHistogram(medianOfTries, numOfTriesAccomulate, colors, numberOfTotalGuessedWords)
 
     userOption = processUserInput(totalWords)
 

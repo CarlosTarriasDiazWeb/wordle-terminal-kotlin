@@ -79,13 +79,13 @@ fun printWord(guessWord: String, randomWord: String, letterToCount: MutableMap<C
   for (i in guessWord.indices) {
     //Per controlar el nombre de vegades que apareix un caràcter concret a la paraula tenim en compte el seu valor al diccionari
     if (guessWord[i] == randomWord[i] && letterToCount.getValue(guessWord[i]) > 0){
-      print("${colors["green"]}${guessWord[i]}${colors["reset"]}")
+      printChar(colors["green"], colors["reset"], guessWord[i])
       correctLetters++
       //Controlem duplicitat del caràcter
       letterToCount[guessWord[i]] = letterToCount.getValue(guessWord[i]) - 1
     }
     else if (guessWord[i] in randomWord && letterToCount.getValue(guessWord[i]) > 0) {
-      print("${colors["yellow"]}${guessWord[i]}${colors["reset"]}")
+      printChar(colors["yellow"], colors["reset"], guessWord[i])
       //Controlem duplicitat del caràcter
       letterToCount[guessWord[i]] = letterToCount.getValue(guessWord[i]) - 1
     }
@@ -113,6 +113,7 @@ fun playerWins(correctLetters: Int) : Boolean = correctLetters == 5
  */
 fun calculateGameHistogram(medianOfTries: DoubleArray, numOfTriesAccomulate: IntArray, numTries: Int, numberOfTotalGuessedWords: Int) {
   if (numTries > 0) {
+    //Incrementem en un el número d'intents específic.
     numOfTriesAccomulate[numTries - 1]++
     //Fórmula: media = nombre de vegades que ha encertat la paraula en l'intent num X / nombre total de partides jugades
     var partialResult = 0.0

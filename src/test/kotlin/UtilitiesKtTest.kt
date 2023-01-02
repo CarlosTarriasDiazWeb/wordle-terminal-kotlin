@@ -49,7 +49,7 @@ internal class UtilitiesKtTest {
   fun checkIfRandomWordIsValid() {
     loadFile("test1.txt", dictionary)
     val randomWord = getRandomWord(dictionary)
-    assertTrue(randomWord.isEmpty() || randomWord.length == 5) //En aquest cas, té sentit que sigui buida ja que una paraula buida ja no es pot utilitzar més!
+    assertTrue(randomWord.isEmpty() || randomWord.length == 5) //En aquest cas, té sentit que pugui ser buida ja que ho comprovem a l'hora de generar-la.
   }
 
   //setLetterToCount() Tests
@@ -127,6 +127,12 @@ internal class UtilitiesKtTest {
   fun checkIfParamsAreValidStatisticsIsNotEmpty() {
     calculateGameHistogram(medianOfTries, numOfTriesAccomulate, 2, 5)
     assertTrue(medianOfTries.any{it.toInt() != 0 })
+  }
+
+  @Test
+  fun checkIfMediansAreValidIfParamsAreValid() {
+    calculateGameHistogram(medianOfTries, numOfTriesAccomulate, 2, 10)
+    assertTrue(medianOfTries.all{ it.toInt() in 0..100 })
   }
 
 }

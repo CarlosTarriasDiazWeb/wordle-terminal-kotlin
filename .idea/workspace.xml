@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0fa82c4e-9aaf-4b02-bc03-0486bfc2a80b" name="Changes" comment="Afegida documentació de funcions, test per funcions auxiliars, readme actualitzat.">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/PrintUtilitiesKtTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/printUtilities.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/printUtilities.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utilities.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utilities.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/UtilitiesKtTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/UtilitiesKtTest.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="M3_UF1_PT_TarriasCarlos" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="M3_UF1_PT_TarriasCarlos" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="M3_UF1_PT_TarriasCarlos" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="documentation" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Gzl8qZIeP128mCWaIHxuxuVTU7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.Tests in 'M3_UF1_PT_TarriasCarlos'">
+    <configuration name="M3_UF1_PT_TarriasCarlos [dokkaHtml]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="dokkaHtml" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="PrintUtilitiesKtTest.checkIfHistogramIsShownIfAtLeastOneWordHasBeenGuessed" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;PrintUtilitiesKtTest.checkIfHistogramIsShownIfAtLeastOneWordHasBeenGuessed&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="PrintUtilitiesKtTest.checkIfStatisticsAreShownIfAtLeastOneWordHasBeenGuessed" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;PrintUtilitiesKtTest.checkIfStatisticsAreShownIfAtLeastOneWordHasBeenGuessed&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'M3_UF1_PT_TarriasCarlos'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainKt" />
+      <module name="M3_UF1_PT_TarriasCarlos.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.Tests in 'M3_UF1_PT_TarriasCarlos'" />
+        <item itemvalue="Gradle.M3_UF1_PT_TarriasCarlos [dokkaHtml]" />
+        <item itemvalue="Kotlin.MainKt" />
+        <item itemvalue="Gradle.PrintUtilitiesKtTest.checkIfHistogramIsShownIfAtLeastOneWordHasBeenGuessed" />
+        <item itemvalue="Gradle.PrintUtilitiesKtTest.checkIfStatisticsAreShownIfAtLeastOneWordHasBeenGuessed" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0fa82c4e-9aaf-4b02-bc03-0486bfc2a80b" name="Changes" comment="" />
+      <created>1667399139797</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667399139797</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Diccionario de palabras, colores, y bucle de partida creados">
+      <created>1667399802397</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667399802397</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Bucle principal del juego hecho, errores de caracteres corregidos. Añadido control de input de usuario. Funcionalidad básica del juego hecha. Queda mirar duplicados.">
+      <created>1667637346428</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1667637346428</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Corregido bug del número de intentos. Más comentarios. Controlada duplicidad de carácteres.">
+      <created>1667649451398</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667649451398</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Prueba del readme.">
+      <created>1667733911472</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667733911472</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Se ha añadido la funcionalidad de cargar las palabras mediante un archivo de texto externo.">
+      <created>1667824667425</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667824667425</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Extendida documentación. Corrección de errores, Añadido archivo con las palabras del juego.">
+      <created>1667843810331</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1667843810331</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Extendida documentación. Más comentarios.">
+      <created>1668361676529</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1668361676529</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Funcionalidades implementadas: numero de palabras acertadas, palabras no acertadas, racha actual, racha máxima, media de intentos. &#10;Readme actualizado.">
+      <created>1668527097718</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1668527097718</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Corregidos varios errores.&#10;Readme actualizado.">
+      <created>1668591781566</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1668591781566</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Readme actualizado.">
+      <created>1668857935460</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1668857935460</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Funcionalidad de leer las palabras de fichero documentada y testeada.">
+      <created>1671997616444</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671997616444</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Resto de funcionalidades documentadas.">
+      <created>1672052146872</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1672052146872</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Tests añadidos y errores corregidos.">
+      <created>1672055155618</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1672055155618</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Modularización del código y corrección de errores.">
+      <created>1672062097477</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1672062097477</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="actualitzacio" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Diccionario de palabras, colores, y bucle de partida creados" />
+    <MESSAGE value="Bucle principal del juego hecho, errores de caracteres corregidos. Añadido control de input de usuario. Funcionalidad básica del juego hecha. Queda mirar duplicados." />
+    <MESSAGE value="Corregido bug del número de intentos. Más comentarios. Controlada duplicidad de carácteres." />
+    <MESSAGE value="Prueba del readme." />
+    <MESSAGE value="Se ha añadido la funcionalidad de cargar las palabras mediante un archivo de texto externo." />
+    <MESSAGE value="Extendida documentación. Corrección de errores, Añadido archivo con las palabras del juego." />
+    <MESSAGE value="Extendida documentación. Más comentarios." />
+    <MESSAGE value="Funcionalidades implementadas: numero de palabras acertadas, palabras no acertadas, racha actual, racha máxima, media de intentos. &#10;Readme actualizado." />
+    <MESSAGE value="Corregidos varios errores.&#10;Readme actualizado." />
+    <MESSAGE value="Readme actualizado." />
+    <MESSAGE value="Funcionalidad de leer las palabras de fichero documentada y testeada." />
+    <MESSAGE value="Resto de funcionalidades documentadas." />
+    <MESSAGE value="Tests añadidos y errores corregidos." />
+    <MESSAGE value="Modularización del código y corrección de errores." />
+    <MESSAGE value="Afegida documentació de funcions, test per funcions auxiliars, readme actualitzat." />
+    <option name="LAST_COMMIT_MESSAGE" value="Afegida documentació de funcions, test per funcions auxiliars, readme actualitzat." />
+  </component>
+</project>

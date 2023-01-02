@@ -1,11 +1,31 @@
 /**
  * Mostra per terminal un missatge d'avís quan l'usuari ha esgotat tots els intents.
- * @param randomWOrd String: Paraula aleatòria seleccionada de la partida actual.
+ * @param randomWord String: Paraula aleatòria seleccionada de la partida actual.
+ * @return Boolean: Control per indicar que s'ha mostrat correctament.
  */
-fun printLoseMessage(randomWOrd: String) {
-  println("Una pena, no has acertado la palabra...")
-  println("La palabra era: $randomWord")
-  println("Has perdido la racha...")
+fun printLoseMessage(randomWord: String): Boolean {
+  if (randomWord.isNotEmpty()) {
+    println("Una pena, no has acertado la palabra...")
+    println("La palabra era: $randomWord")
+    println("Has perdido la racha...")
+    return true
+  }
+  return false
+}
+
+/**
+ * Pinta del color específic el caràcter concret de la paraula introdïda per l'usuari.
+ * @param color String : Color específic del caràcter.
+ * @param reset String : Color per resetejar al color per defecte.
+ * @param char Char : Caràcter de la paraula introduïda.
+ * @return Boolean: Control per indicar que s'ha mostrat correctament.
+ */
+fun printChar(color: String?, reset: String?, char:Char): Boolean {
+  if (!color.isNullOrEmpty() && !reset.isNullOrEmpty()) {
+    print("$color$char$reset")
+    return true
+  }
+  return false
 }
 
 /**
@@ -16,21 +36,26 @@ fun printLoseMessage(randomWOrd: String) {
  * @param totalWords Int : Nombre de paraules que queden per encertar.
  * @param continuousGuessedWords Int: Ratxa de paraules encertades.
  * @param bestContinuousGuessedWords Int: Millor ratxa d'encerts.
+ * @return Boolean: Control per indicar que s'ha mostrat correctament.
  */
 fun showGameStatistics(currentNumberOfPlays: Int,
                        numberOfTotalGuessedWords:Int,
                        wordsPercentage:Double,
                        totalWords:Int,
                        continuousGuessedWords:Int,
-                       bestContinuousGuessedWords:Int) {
-  println("===============MOSTRANDO ESTADÍSTICA=============")
-  println("PARTIDAS JUGADAS: $currentNumberOfPlays")
-  println("HAS RESUELTO UN TOTAL DE $numberOfTotalGuessedWords PALABRAS")
-  println("PORCENTAJE DE PALABRAS RESUELTAS DEL DICCIONARIO ${String.format("%.2f", wordsPercentage)}%") //mostrem el percentatge amb dos decimals de precisió.
-  println("TODAVÍA PUEDES RESOLVER $totalWords PALABRAS")
-  println("TU RACHA ACTUAL ES DE : $continuousGuessedWords PALABRAS")
-  println("TU MEJOR RACHA ES DE : $bestContinuousGuessedWords PALABRAS")
-  println("**Mostrando media de intentos**")
+                       bestContinuousGuessedWords:Int) : Boolean {
+  if (numberOfTotalGuessedWords > 0) {
+    println("===============MOSTRANDO ESTADÍSTICA=============")
+    println("PARTIDAS JUGADAS: $currentNumberOfPlays")
+    println("HAS RESUELTO UN TOTAL DE $numberOfTotalGuessedWords PALABRAS")
+    println("PORCENTAJE DE PALABRAS RESUELTAS DEL DICCIONARIO ${String.format("%.2f", wordsPercentage)}%") //Mostrem el percentatge amb dos decimals de precisió.
+    println("TODAVÍA PUEDES RESOLVER $totalWords PALABRAS")
+    println("TU RACHA ACTUAL ES DE : $continuousGuessedWords PALABRAS")
+    println("TU MEJOR RACHA ES DE : $bestContinuousGuessedWords PALABRAS")
+    println("**Mostrando media de intentos**")
+    return true
+  }
+  return false
 }
 
 /**
@@ -38,15 +63,24 @@ fun showGameStatistics(currentNumberOfPlays: Int,
  * @param medianOfTries DoubleArray: Emmagatzema la mitjana d'intents de tot el joc.
  * @param numOfTriesAccomulate IntArray: Emmagatzema el total de paraules que s'han encertat per 1..6 intents.
  * @param colors MutableMap<String, String>: Conté els colors que amb què es pintarà l'histograma.
+ * @param numberOfTotalGuessedWords Int: Nombre de paraules encertades.
+ * @return Boolean: Control per indicar que s'ha mostrat correctament.
  */
-fun showGameHistogram(medianOfTries: DoubleArray, numOfTriesAccomulate: IntArray, colors: MutableMap<String, String>) {
-  for (i in medianOfTries.indices) {
-    print("${i+1}: ")
-    repeat(numOfTriesAccomulate[i]) {
-      print("${colors["white"]} ")
+fun showGameHistogram(medianOfTries: DoubleArray,
+                      numOfTriesAccomulate: IntArray,
+                      colors: MutableMap<String, String>,
+                      numberOfTotalGuessedWords: Int) : Boolean {
+  if (numberOfTotalGuessedWords > 0) {
+    for (i in medianOfTries.indices) {
+      print("${i+1}: ")
+      repeat(numOfTriesAccomulate[i]) {
+        print("${colors["white"]} ")
+      }
+      print(" ${colors["reset"]} (${String.format("%.1f",medianOfTries[i])}%)") //Mostrem el percentatge amb un decimal de precisió.
+      println("")
     }
-    print(" ${colors["reset"]} (${String.format("%.1f",medianOfTries[i])}%)") //mostrem el percentatge amb un decimal de precisió.
-    println("")
+    println("====================FIN ESTADÍSTICAS=================")
+    return true
   }
-  println("====================FIN ESTADÍSTICAS=================")
+  return false
 }
