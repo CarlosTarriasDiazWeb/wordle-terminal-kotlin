@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0fa82c4e-9aaf-4b02-bc03-0486bfc2a80b" name="Changes" comment="Afegida documentació de funcions, test per funcions auxiliars, readme actualitzat.">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/PrintUtilitiesKtTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/printUtilities.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/printUtilities.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utilities.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utilities.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/UtilitiesKtTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/UtilitiesKtTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +89,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Tests in 'M3_UF1_PT_TarriasCarlos'">
+  <component name="RunManager" selected="Gradle.M3_UF1_PT_TarriasCarlos [dokkaHtml]">
     <configuration name="M3_UF1_PT_TarriasCarlos [dokkaHtml]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -195,8 +187,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Tests in 'M3_UF1_PT_TarriasCarlos'" />
         <item itemvalue="Gradle.M3_UF1_PT_TarriasCarlos [dokkaHtml]" />
+        <item itemvalue="Gradle.Tests in 'M3_UF1_PT_TarriasCarlos'" />
         <item itemvalue="Kotlin.MainKt" />
         <item itemvalue="Gradle.PrintUtilitiesKtTest.checkIfHistogramIsShownIfAtLeastOneWordHasBeenGuessed" />
         <item itemvalue="Gradle.PrintUtilitiesKtTest.checkIfStatisticsAreShownIfAtLeastOneWordHasBeenGuessed" />
@@ -310,7 +302,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672062097477</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Afegida documentació de funcions, test per funcions auxiliars, readme actualitzat.">
+      <created>1672666458846</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1672666458846</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

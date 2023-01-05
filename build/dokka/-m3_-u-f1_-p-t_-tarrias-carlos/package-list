@@ -1,0 +1,50 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:////PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/index.html
+$dokka.location:/MainKt///PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-main-kt/index.html
+$dokka.location:/MainKt/main/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-main-kt/main.html
+$dokka.location:/PrintUtilitiesKt///PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-print-utilities-kt/index.html
+$dokka.location:/PrintUtilitiesKt/printChar/#kotlin.String?#kotlin.String?#kotlin.Char/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-print-utilities-kt/print-char.html
+$dokka.location:/PrintUtilitiesKt/printLoseMessage/#kotlin.String/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-print-utilities-kt/print-lose-message.html
+$dokka.location:/PrintUtilitiesKt/showGameHistogram/#kotlin.DoubleArray#kotlin.IntArray#kotlin.collections.MutableMap[kotlin.String,kotlin.String]#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-print-utilities-kt/show-game-histogram.html
+$dokka.location:/PrintUtilitiesKt/showGameStatistics/#kotlin.Int#kotlin.Int#kotlin.Double#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-print-utilities-kt/show-game-statistics.html
+$dokka.location:/UtilitiesKt///PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-utilities-kt/index.html
+$dokka.location:/UtilitiesKt/calculateGameHistogram/#kotlin.DoubleArray#kotlin.IntArray#kotlin.Int#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-utilities-kt/calculate-game-histogram.html
+$dokka.location:/UtilitiesKt/getRandomWord/#java.util.ArrayList[kotlin.String]/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-utilities-kt/get-random-word.html
+$dokka.location:/UtilitiesKt/insertWord/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-utilities-kt/insert-word.html
+$dokka.location:/UtilitiesKt/loadFile/#kotlin.String#java.util.ArrayList[kotlin.String]/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-utilities-kt/load-file.html
+$dokka.location:/UtilitiesKt/playerWins/#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-utilities-kt/player-wins.html
+$dokka.location:/UtilitiesKt/printWord/#kotlin.String#kotlin.String#kotlin.collections.MutableMap[kotlin.Char,kotlin.Int]#kotlin.collections.MutableMap[kotlin.String,kotlin.String]/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-utilities-kt/print-word.html
+$dokka.location:/UtilitiesKt/processUserInput/#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-utilities-kt/process-user-input.html
+$dokka.location:/UtilitiesKt/setLetterToCount/#kotlin.collections.MutableMap[kotlin.Char,kotlin.Int]#kotlin.String/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-utilities-kt/set-letter-to-count.html
+$dokka.location:/WordleVariablesKt///PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/index.html
+$dokka.location:/WordleVariablesKt/getBestContinuousGuessedWords/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-best-continuous-guessed-words.html
+$dokka.location:/WordleVariablesKt/getColors/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-colors.html
+$dokka.location:/WordleVariablesKt/getContinuousGuessedWords/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-continuous-guessed-words.html
+$dokka.location:/WordleVariablesKt/getCorrectLetters/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-correct-letters.html
+$dokka.location:/WordleVariablesKt/getCurrentNumberOfPlays/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-current-number-of-plays.html
+$dokka.location:/WordleVariablesKt/getGuessWord/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-guess-word.html
+$dokka.location:/WordleVariablesKt/getLetterToCount/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-letter-to-count.html
+$dokka.location:/WordleVariablesKt/getMedianOfTries/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-median-of-tries.html
+$dokka.location:/WordleVariablesKt/getNumOfTriesAccomulate/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-num-of-tries-accomulate.html
+$dokka.location:/WordleVariablesKt/getNumTries/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-num-tries.html
+$dokka.location:/WordleVariablesKt/getNumberOfTotalGuessedWords/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-number-of-total-guessed-words.html
+$dokka.location:/WordleVariablesKt/getPlayerWins/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-player-wins.html
+$dokka.location:/WordleVariablesKt/getRandomWord/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-random-word.html
+$dokka.location:/WordleVariablesKt/getTotalWords/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-total-words.html
+$dokka.location:/WordleVariablesKt/getUserOption/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-user-option.html
+$dokka.location:/WordleVariablesKt/getWordsPercentage/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/get-words-percentage.html
+$dokka.location:/WordleVariablesKt/setBestContinuousGuessedWords/#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/set-best-continuous-guessed-words.html
+$dokka.location:/WordleVariablesKt/setContinuousGuessedWords/#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/set-continuous-guessed-words.html
+$dokka.location:/WordleVariablesKt/setCorrectLetters/#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/set-correct-letters.html
+$dokka.location:/WordleVariablesKt/setCurrentNumberOfPlays/#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/set-current-number-of-plays.html
+$dokka.location:/WordleVariablesKt/setGuessWord/#kotlin.String/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/set-guess-word.html
+$dokka.location:/WordleVariablesKt/setNumTries/#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/set-num-tries.html
+$dokka.location:/WordleVariablesKt/setNumberOfTotalGuessedWords/#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/set-number-of-total-guessed-words.html
+$dokka.location:/WordleVariablesKt/setPlayerWins/#kotlin.Boolean/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/set-player-wins.html
+$dokka.location:/WordleVariablesKt/setRandomWord/#kotlin.String/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/set-random-word.html
+$dokka.location:/WordleVariablesKt/setTotalWords/#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/set-total-words.html
+$dokka.location:/WordleVariablesKt/setUserOption/#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/set-user-option.html
+$dokka.location:/WordleVariablesKt/setWordsPercentage/#kotlin.Double/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-wordle-variables-kt/set-words-percentage.html
+
+

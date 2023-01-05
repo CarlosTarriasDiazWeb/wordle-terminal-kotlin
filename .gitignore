@@ -1,5 +1,11 @@
 .gradle
-build/
+build/classes
+build/kotlin
+build/libs
+build/snapshot
+build/test-results
+build/tmp
+
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
@@ -16,15 +22,15 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .idea/
-gradle/
+#gradle/
 build.gradle.kts
 gradle.properties
 gradlew
 gradlew.bat
 settings.gradle.kts
-src/test/
+#src/test/
 .idea
-gradle
+#gradle
 
 ### Eclipse ###
 .apt_generated
