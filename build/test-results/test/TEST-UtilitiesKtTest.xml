@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="UtilitiesKtTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2023-01-05T09:58:13" hostname="LAPTOP-MCV0VM2C" time="0.101">
+  <properties/>
+  <testcase name="checkIfMapIsEmptyIfWordIsInvalid()" classname="UtilitiesKtTest" time="0.004"/>
+  <testcase name="checkIfLosesIfCorrectLettersIsNotFive()" classname="UtilitiesKtTest" time="0.0"/>
+  <testcase name="checkIfMapIsCorrect()" classname="UtilitiesKtTest" time="0.003"/>
+  <testcase name="checkIfAllWordsOfDictionaryAreLoaded()" classname="UtilitiesKtTest" time="0.031"/>
+  <testcase name="checkIfDictionaryIsEmptyIfNoPathProvided()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfCorrectLettersIsFiveIfGuessWordIsCorrect()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfTriesIsInvalidStatisticsAreEmpty()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfNumberOfTotalGuessedWordsIsZeroStatisticsAreEmpty()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfParamsAreValidStatisticsIsNotEmpty()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfMapIsEmptyIfWordIsEmpty()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfDictionaryIsNotEmptyWhenLoaded()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfWinsIfCorrectLettersEqualsFive()" classname="UtilitiesKtTest" time="0.0"/>
+  <testcase name="checkIfCorrectLettersIsValid()" classname="UtilitiesKtTest" time="0.012"/>
+  <testcase name="checkIfDictionaryIsEmptyIfPathIsIncorrect()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfRandomWordIsValid()" classname="UtilitiesKtTest" time="0.024"/>
+  <testcase name="checkIfAllWordOfDictionaryAreValid()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfCorrectLettersIsFour()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfParamsAreInvalidStatisticsIsEmpty()" classname="UtilitiesKtTest" time="0.0"/>
+  <testcase name="checkIfMediansAreValidIfParamsAreValid()" classname="UtilitiesKtTest" time="0.001"/>
+  <system-out><![CDATA[?[32mG?[0m?[32mO?[0m?[32mR?[0m?[32mR?[0m?[32mA?[0m
+XE?[32mR?[0mN?[32mA?[0m
+?[32mG?[0m?[32mO?[0m?[32mR?[0m?[32mR?[0mI
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

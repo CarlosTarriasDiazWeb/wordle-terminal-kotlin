@@ -1,10 +1,10 @@
-.gradle
-build/classes
-build/kotlin
-build/libs
-build/snapshot
-build/test-results
-build/tmp
+#.gradle
+#build/classes
+#build/kotlin
+#build/libs
+#build/snapshot
+#build/test-results
+#build/tmp
 
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
