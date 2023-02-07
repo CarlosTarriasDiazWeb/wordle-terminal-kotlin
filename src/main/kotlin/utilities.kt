@@ -1,4 +1,7 @@
 import java.io.File
+import java.nio.file.Path
+import java.util.Scanner
+import kotlin.io.path.*
 
 /**
  * Emplena el diccionari de paraules a partir d'un fitxer extern.
@@ -12,6 +15,7 @@ fun loadFile(fileName: String, dictionary: ArrayList<String>) {
     if (file.isFile && file.exists()) {
       val lines: List<String> = file.readLines()
       lines.forEach { line -> dictionary.add(line) }
+      println(dictionary.size)
     }
   }
 }
@@ -152,4 +156,60 @@ fun processUserInput(totalWords: Int): Int {
     }
   }
   return userOption
+}
+
+/**
+ * S'encarrega de retornar el usuari que jugarà al iniciar la partida (en cas que no el canviem en el menú). Pot ser un usuari
+ * nou(en cas que no hagi cap registrat) o un que ja consti en el fitxers de usuaris.
+ * @param folderRoute String: Ruta de la carpeta del fitxer d'usuaris.
+ * @return String : Cadena que representa l'usuari
+ */
+fun loadUser(folderRoute: String) : String {
+  val usersRoute = Path(folderRoute)
+  if (usersRoute.exists()) {
+    val usersFiles = usersRoute.listDirectoryEntries()
+
+    //Si no hi han usuaris registrats (no hi ha cap fitxer), creem un de nou.
+    if (usersFiles.isEmpty()) {
+      println("No existen usuarios en el sistema. ")
+      println("Procediendo a crear un nuevo usuario...")
+      val scanner = Scanner(System.`in`)
+      return createUser(folderRoute + "users.txt", scanner)
+    }
+
+    //Si existeixen usuaris, càrreguem el primer usuari del primer fitxers de la carpeta users.
+    if (usersFiles[0].readLines().isNotEmpty()) { //Comprovem que hi hagi contigut al fitxer.
+      return usersFiles[0].readLines()[0]
+    }
+    println("El archivo de usuarios existe pero no constan usuarios")
+    return ""
+  }
+  else {
+    println("Ha habido un problema a la hora de comprobar la carpeta de usuarios")
+  }
+
+  return ""
+}
+
+/**
+ * S'encarrega d'afegir un nou usuari al sistema amb el nom que introdueixi l'usuari.
+ * @param userFileName String: Nom del fitxer on s'emmagatzemen els diferents usuaris.
+ * @return String : Nom de l'usuari creat.
+ */
+fun createUser(userFileName: String, scanner: Scanner): String {
+  if (userFileName.isEmpty()) {
+    println("Error al crear el nuevo usuario. No se proporciona la ruta del archivo de usuarios del sistema.")
+    return ""
+  }
+  println("Por favor, introduce el nombre del nuevo usuario para poder jugar:")
+
+  var userName = scanner.next().trim()
+  while (userName.isEmpty()) {
+    println("El nombre de usuario no puede estar vacío. Vuélvelo a intentar por favor:")
+    userName = readln().trim()
+  }
+  val userFile = File(userFileName)
+  userFile.createNewFile()
+  userFile.appendText("${userName}\n")
+  return userName
 }

@@ -1,6 +1,7 @@
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
-import java.util.ArrayList
+import org.junit.jupiter.api.Test
+import java.util.*
+import kotlin.collections.ArrayList
 
 internal class UtilitiesKtTest {
 
@@ -134,5 +135,34 @@ internal class UtilitiesKtTest {
     calculateGameHistogram(medianOfTries, numOfTriesAccomulate, 2, 10)
     assertTrue(medianOfTries.all{ it.toInt() in 0..100 })
   }
+
+  //loadUser() Tests
+  @Test
+  fun checkThatReturnsUserNameIfRouteExists() {
+    val usersRoute = "./users/"
+    assertTrue(loadUser(usersRoute).isNotEmpty())
+  }
+
+  @Test
+  fun checkThatReturnsEmptyUserNameIfRouteNotExists() {
+    val route = "./folderTest/"
+    assertTrue(loadUser(route).isEmpty())
+  }
+
+  //createuser() Tests
+  @Test
+  fun checkThatReturnUserNameIfUserFileNameIsNotEmpty() {
+    val route = "./users/users.txt"
+    val scanner = Scanner(System.`in`)
+    assertTrue(createUser(route, scanner).isNotEmpty())
+  }
+
+  @Test
+  fun checkThatReturnEmptyUserNameIfUserFileNameIsEmpty() {
+    val route = ""
+    val scanner = Scanner(System.`in`)
+    assertTrue(createUser(route, scanner).isEmpty())
+  }
+
 
 }

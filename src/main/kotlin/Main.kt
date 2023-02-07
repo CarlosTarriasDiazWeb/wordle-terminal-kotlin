@@ -1,5 +1,7 @@
+import java.nio.file.Path
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.io.path.*
 
 //  Autor: Carlos Tarrias Diaz
 //  Projecte troncal M3 - Wordle
@@ -24,9 +26,14 @@ fun main() {
   val dictionary = ArrayList<String>()
   loadFile("test1.txt", dictionary)
 
+  //Carga del primer usuari registrat
+  val userLoaded = loadUser("./users/")
+  if (userLoaded.isNotEmpty()) {
+    println("Se ha cargado el usuario $userLoaded")
+  }
+
   //Bucle principal del joc
   do {
-
     do {
       randomWord = getRandomWord(dictionary)
     }while(randomWord.isEmpty()) //Anem seleccionant una paraula del diccionari fins que escollim una que no està buïda.

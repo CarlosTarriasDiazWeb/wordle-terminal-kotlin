@@ -84,3 +84,20 @@ fun showGameHistogram(medianOfTries: DoubleArray,
   }
   return false
 }
+
+
+/**
+ * Mostra el menú incial de l'aplicació.
+ */
+fun showMenu() {
+  var menu =
+    """
+    |=============MENU PRINCIPAL==========  
+    |*1.CAMBIAR LENGUAJE DE LAS PALABRAS||
+    |*2.CAMBIAR USUARIO
+    |*3.CARGAR PARTIDA 
+    |=====================================
+    """.trimMargin()
+
+  println(menu)
+}
