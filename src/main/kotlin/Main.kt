@@ -30,11 +30,11 @@ fun main() {
   var userLoaded = loadUser("./users/")
   if (userLoaded.isNotEmpty()) {
     println("Se ha cargado el usuario $userLoaded")
-    var userOption: Int
+    var userOptionMenu: Int
     do {
       showMenu(language, userLoaded)
-      userOption = readln().toInt()
-      when(userOption) {
+      userOptionMenu = readln().toInt()
+      when(userOptionMenu) {
         1 -> language = changeLanguage(language, dictionary)
         2 -> {
           println("Introduce el nombre de usuario al que quieras cambiar:")
@@ -44,7 +44,7 @@ fun main() {
         0 -> println("Comenzando juego...")
         else -> println("No existe esta opción. Vuelvélo a intentar:")
       }
-    }while(userOption != 0)
+    }while(userOptionMenu != 0)
 
   }
 
@@ -126,6 +126,9 @@ fun main() {
     //Si el jugador ha endevinat la paraula actualitzem el comptador d'intents corresponent a la partida i actualitzem els valors de les mitjanes.
     if (playerWins) {
       calculateGameHistogram(medianOfTries, numOfTriesAccomulate, numTries, numberOfTotalGuessedWords)
+
+      //Enregistrem els pàràmetres de la partida al arxiu d'usuari corresponent.
+      //saveData()
     }
 
     showGameHistogram(medianOfTries, numOfTriesAccomulate, colors, numberOfTotalGuessedWords)

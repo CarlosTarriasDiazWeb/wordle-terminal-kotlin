@@ -1,3 +1,4 @@
+import jdk.jfr.Percentage
 import org.intellij.lang.annotations.Language
 import java.io.File
 import java.nio.file.Path
@@ -245,16 +246,56 @@ fun changeUser(folderRoute: String, currentUser: String, newUser: String): Strin
       lines = file.readLines()
       for (line in lines) {
         if (line == newUser) {
-          println("Usuario ${newUser} encontrado. Actualizando el sistema...")
+          println("Usuario ${newUser} encontrado. Actualizando información...")
           return newUser
         }
       }
     }
-    else {
-      continue
-    }
-
+    else continue
   }
-  println("Problema con los archivos de usuarios. Cancelando operación...")
+  println("No se ha encontrado el usuario seleccionado. Cancelando operación...")
   return currentUser
+}
+
+//fun updateWords(dictionary: ArrayList<String>, userSaveData: String) {
+//  val saveFile = File(userSaveData)
+//  if (saveFile.exists()) {
+//    saveFile.createNewFile()
+//  }
+//  else {
+//
+//  }
+//}
+
+fun saveData(userSaveDataPath: String,
+             continuousGuessedWords:Int,
+             numberOfTotalGuessedWords: Int,
+             bestContinuousGuessedWords:Int,
+             currentnumberOfPlays:Int,
+             wordsPercentage: Double,
+             numOfTriesAccomulate: IntArray,
+             medianOfTries: DoubleArray
+          )
+{
+  val saveFile = File(userSaveDataPath)
+  if (!saveFile.exists()) {
+    saveFile.createNewFile()
+    saveFile.appendText("continuousGuessedWords:0\n")
+    saveFile.appendText("numberOfTotalGuessedWords:0\n")
+    saveFile.appendText("bestContinuousGuessedWords:0\n")
+    saveFile.appendText("currentNumberOfPlays:0\n")
+    saveFile.appendText("wordsPercentage:0.0\n")
+    saveFile.appendText("numTriesAccomulate:0,0,0,0,0,0")
+    saveFile.appendText("medianOfTries:0.0,0.0,0.0,0.0,0.0,0.0\n")
+  }
+  else {
+    saveFile.writeText("") //Limpiem fitxers
+    saveFile.appendText("continuousGuessedWords:${continuousGuessedWords}\n")
+    saveFile.appendText("numberOfTotalGuessedWords:${numberOfTotalGuessedWords}\n")
+    saveFile.appendText("bestContinuousGuessedWords:${bestContinuousGuessedWords}\n")
+    saveFile.appendText("currentNumberOfPlays:${currentnumberOfPlays}\n")
+    saveFile.appendText("wordsPercentage:${wordsPercentage}\n")
+    saveFile.appendText("numTriesAccomulate:${numOfTriesAccomulate[0]},${numOfTriesAccomulate[1]},0,0,0,0")
+    saveFile.appendText("medianOfTries:0.0,0.0,0.0,0.0,0.0,0.0\n")
+  }
 }
