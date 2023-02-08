@@ -1,3 +1,5 @@
+import org.intellij.lang.annotations.Language
+
 /**
  * Mostra per terminal un missatge d'avís quan l'usuari ha esgotat tots els intents.
  * @param randomWord String: Paraula aleatòria seleccionada de la partida actual.
@@ -89,15 +91,22 @@ fun showGameHistogram(medianOfTries: DoubleArray,
 /**
  * Mostra el menú incial de l'aplicació.
  */
-fun showMenu() {
+fun showMenu(language: String, userLoaded: String) {
   var menu =
     """
     |=============MENU PRINCIPAL==========  
-    |*1.CAMBIAR LENGUAJE DE LAS PALABRAS||
+    |*1.CAMBIAR LENGUAJE DE LAS PALABRAS
     |*2.CAMBIAR USUARIO
-    |*3.CARGAR PARTIDA 
+    |*0.COMENZAR A JUGAR
     |=====================================
     """.trimMargin()
 
   println(menu)
+  printCurrentState(language, userLoaded)
+  println("> Escoge una opción: ")
+}
+
+fun printCurrentState(language: String, userLoaded: String) {
+  println("~~~USUARIO ACTUAL -> ${userLoaded}")
+  println("~~~IDIOMA DE LAS PALABRAS ACTUAL -> ${language}")
 }

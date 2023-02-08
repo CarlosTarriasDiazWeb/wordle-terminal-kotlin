@@ -26,3 +26,6 @@ var currentNumberOfPlays = 0 //Recull el nombre total de partides jugades.
 val medianOfTries = DoubleArray(6){0.0} //Recull la mitjana d'intents del total de partides.
 val numOfTriesAccomulate = IntArray(6){0} //A cada posició i-1 recull el total de paraules que s'han encertat amb i intents.
 var totalWords = 109 //Recull el total de paraules totals que es podran endevinar al joc. Cada paraula només pot sortir una sola vegada.
+
+//Variables de canvi d'idioma del joc
+var language = "Espanyol"

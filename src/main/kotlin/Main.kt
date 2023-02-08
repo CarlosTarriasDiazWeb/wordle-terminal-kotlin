@@ -22,14 +22,30 @@ import kotlin.io.path.*
 fun main() {
 
   //============Array de paraules que tindrá el joc=======//
-  // Càrrega de diccionari mitjançant fitxer
+  // Càrrega de diccionari de paraules en espanyol (per defecte ) mitjançant el fitxer corresponent.
   val dictionary = ArrayList<String>()
-  loadFile("test1.txt", dictionary)
+  loadFile(language, dictionary)
 
   //Carga del primer usuari registrat
-  val userLoaded = loadUser("./users/")
+  var userLoaded = loadUser("./users/")
   if (userLoaded.isNotEmpty()) {
     println("Se ha cargado el usuario $userLoaded")
+    var userOption: Int
+    do {
+      showMenu(language, userLoaded)
+      userOption = readln().toInt()
+      when(userOption) {
+        1 -> language = changeLanguage(language, dictionary)
+        2 -> {
+          println("Introduce el nombre de usuario al que quieras cambiar:")
+          val newUserSelected = readln()
+          userLoaded = changeUser("./users/", userLoaded, newUserSelected)
+        }
+        0 -> println("Comenzando juego...")
+        else -> println("No existe esta opción. Vuelvélo a intentar:")
+      }
+    }while(userOption != 0)
+
   }
 
   //Bucle principal del joc
@@ -37,10 +53,11 @@ fun main() {
     do {
       randomWord = getRandomWord(dictionary)
     }while(randomWord.isEmpty()) //Anem seleccionant una paraula del diccionari fins que escollim una que no està buïda.
-
+    //println(dictionary) //debug
     //Marquem la paraula com a buïda per no tornar a seleccionar-la
-    dictionary[dictionary.indexOf(randomWord.lowercase()
-      .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })] = "" //Capitalitzem la paraula per a que coincideixi exactament amb el format de les paraules en el arxiu de lectura.
+    var accessIndex = dictionary.indexOf(randomWord.lowercase()
+      .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
+    dictionary[accessIndex] = "" //Capitalitzem la paraula per a que coincideixi exactament amb el format de les paraules en el arxiu de lectura.
 
     //Disminuim el nombre total de paraules del joc.
     totalWords--
@@ -48,7 +65,7 @@ fun main() {
     //Creem diccionari amb ocurrències de cada caràcter per veure els que estan duplicats en cada intent.
     setLetterToCount(letterToCount, randomWord)
 
-    //println(randomWord) //debug
+    println(randomWord) //debug
 
     //Setejem intents inicials per a la nova partida.
     numTries = 0

@@ -1,3 +1,4 @@
+import org.intellij.lang.annotations.Language
 import java.io.File
 import java.nio.file.Path
 import java.util.Scanner
@@ -5,11 +6,12 @@ import kotlin.io.path.*
 
 /**
  * Emplena el diccionari de paraules a partir d'un fitxer extern.
- * @param fileName String: Path relatiu al arxiu de tipus text amb les paraules.
+ * @param language String: Representa l'idioma de les paraules amb les que juguem.
  * @param dictionary ArrayList<String>: Estructura buïda que contindrá totes les paraules del joc.
  */
-fun loadFile(fileName: String, dictionary: ArrayList<String>) {
-  if (fileName.isNotEmpty()) {
+fun loadFile(language: String, dictionary: ArrayList<String>) {
+  if (language.isNotEmpty()) {
+    val fileName = if (language == "Espanyol") "test1.txt" else if (language == "Angles") "test2.txt" else ""
     val path = "src/main/kotlin/$fileName"
     val file = File(path)
     if (file.isFile && file.exists()) {
@@ -212,4 +214,47 @@ fun createUser(userFileName: String, scanner: Scanner): String {
   userFile.createNewFile()
   userFile.appendText("${userName}\n")
   return userName
+}
+
+/**
+ * Se encarrega de cambiar l'idioma de les paraules del joc i carregar el diccionari corresponent
+ */
+fun changeLanguage(language: String, dictionary: ArrayList<String>): String{
+  dictionary.clear()
+  val newLanguage : String
+  if (language == "Espanyol") {
+    newLanguage = "Angles"
+    loadFile(newLanguage, dictionary)
+    return newLanguage
+  }
+  newLanguage = "Espanyol"
+  loadFile(newLanguage, dictionary)
+  return newLanguage
+}
+
+fun changeUser(folderRoute: String, currentUser: String, newUser: String): String {
+  val folder = File(folderRoute)
+  var lines: List<String>
+  if (!folder.exists() || folder.listFiles().size == 0) {
+    println("Problema con el archivo de usuarios. Cancelando operación...")
+    return currentUser
+  }
+
+  for (file in folder.listFiles()) {
+    if (file.length() > 0) {
+      lines = file.readLines()
+      for (line in lines) {
+        if (line == newUser) {
+          println("Usuario ${newUser} encontrado. Actualizando el sistema...")
+          return newUser
+        }
+      }
+    }
+    else {
+      continue
+    }
+
+  }
+  println("Problema con los archivos de usuarios. Cancelando operación...")
+  return currentUser
 }
