@@ -8,7 +8,7 @@ import kotlin.io.path.*
  * @param dictionary ArrayList<String>: Estructura buïda que contindrá totes les paraules del joc.
  */
 fun loadFile(language: String, dictionary: ArrayList<String>) {
-  val languageToFile = mapOf<String, String>(
+  val languageToFile = mapOf(
     "ES" to "test1.txt",
     "EN" to "test2.txt"
   )
@@ -33,27 +33,6 @@ fun loadFile(language: String, dictionary: ArrayList<String>) {
  * @return String : Paraula aleatòria del diccionari.
  */
 fun getRandomWord(dictionary: ArrayList<String>): String = dictionary[dictionary.indices.random()].uppercase()
-
-
-//  var userLetter: String
-//  var guessWord = ""
-//  repeat(5) { index->
-//    println("Introduce la letra ${index + 1}")
-//    userLetter = readln().uppercase() //cal pasar-ho ja que la paraula generada està en majúscules.
-//    while (userLetter.isEmpty()){ //Mentre l'usuari no introdueixi res li anem demanant la lletra.
-//      println("Tienes que escribir algo...")
-//      userLetter = readln().uppercase()
-//    }
-//    if (userLetter.length > 1) { //Per controlar que només es recolli només un caràcter cada cop que demanem input al usuari.
-//      println("Has introducido más de un carácter. Se recogerá sólo el primero.")
-//      userLetter = userLetter.slice(0..0)
-//    }
-//    println("Ha introducido la letra $userLetter")
-//    guessWord += userLetter
-//  }
-//
-//  return guessWord
-//}
 
 /**
  * Processa la paraula que l'usuari introduirà com a resposta.
@@ -244,7 +223,7 @@ fun changeLanguage(language: String, newLanguage: String, dictionary: ArrayList<
 fun changeUser(folderRoute: String, currentUser: String, newUser: String): String {
   val folder = File(folderRoute)
   var lines: List<String>
-  if (!folder.exists() || folder.listFiles().size == 0) {
+  if (!folder.exists() || folder.listFiles().isEmpty()) {
     println("Problema con el archivo de usuarios. Cancelando operación...")
     return currentUser
   }
@@ -254,7 +233,7 @@ fun changeUser(folderRoute: String, currentUser: String, newUser: String): Strin
       lines = file.readLines()
       for (line in lines) {
         if (line == newUser) {
-          println("Usuario ${newUser} encontrado. Actualizando información...")
+          println("Usuario $newUser encontrado. Actualizando información...")
           return newUser
         }
       }
@@ -265,68 +244,60 @@ fun changeUser(folderRoute: String, currentUser: String, newUser: String): Strin
   return currentUser
 }
 
-//fun updateWords(dictionary: ArrayList<String>, userSaveData: String) {
-//  val saveFile = File(userSaveData)
-//  if (saveFile.exists()) {
-//    saveFile.createNewFile()
-//  }
-//  else {
-//
-//  }
-//}
+fun saveData(userSaveDataPath: String,
+             userStats: Array<Any>,
+             numOfTriesAccomulate: IntArray,
+             wordsHistory: MutableList<MutableList<String>>,
+             totalWords: Int,
+             randomWord: String,
+             accessIndex: Int,
+             numTries: Int
+          )
+{
+  val saveFile = File(userSaveDataPath)
 
-//fun saveData(userSaveDataPath: String,
-//             continuousGuessedWords:Int,
-//             numberOfTotalGuessedWords: Int,
-//             bestContinuousGuessedWords:Int,
-//             currentnumberOfPlays:Int,
-//             wordsPercentage: Double,
-//             numOfTriesAccomulate: IntArray,
-//             lan: String
-//          )
-//{
-//  val saveFile = File(userSaveDataPath)
-//  val languages = arrayOf("ES", "EN")
-//
-//  if (!saveFile.exists()) {
-//    for (language in languages) {
-//      saveFile.createNewFile()
-//      saveFile.appendText("${language}\n")
-//      saveFile.appendText("continuousGuessedWords:0\n")
-//      saveFile.appendText("numberOfTotalGuessedWords:0\n")
-//      saveFile.appendText("bestContinuousGuessedWords:0\n")
-//      saveFile.appendText("currentNumberOfPlays:0\n")
-//      saveFile.appendText("wordsPercentage:0.0\n")
-//      saveFile.appendText("numTriesAccomulate:0,0,0,0,0,0")
-//    }
-//  }
-//  else {
-//      writeData(lan, saveFile, continuousGuessedWords, numberOfTotalGuessedWords, bestContinuousGuessedWords, currentnumberOfPlays, wordsPercentage, numOfTriesAccomulate)
-//  }
-//}
-//
-//fun writeData(language: String,
-//              saveFile: File,
-//              continuousGuessedWords:Int,
-//              numberOfTotalGuessedWords: Int,
-//              bestContinuousGuessedWords:Int,
-//              currentnumberOfPlays:Int,
-//              wordsPercentage: Double,
-//              numOfTriesAccomulate: IntArray)
-//{
-//  val lines = saveFile.readLines()
-//  val indexToWrite = lines.indexOf(language) + 1
-////  for (i in indexToWrite until  indexToWrite + 7) {
-////    lines[i] =
-////  }
-//  saveFile.appendText("continuousGuessedWords:${continuousGuessedWords}\n")
-//  saveFile.appendText("numberOfTotalGuessedWords:${numberOfTotalGuessedWords}\n")
-//  saveFile.appendText("bestContinuousGuessedWords:${bestContinuousGuessedWords}\n")
-//  saveFile.appendText("currentNumberOfPlays:${currentnumberOfPlays}\n")
-//  saveFile.appendText("wordsPercentage:${wordsPercentage}\n")
-//  saveFile.appendText("numTriesAccomulate:${numOfTriesAccomulate[0]},${numOfTriesAccomulate[1]},${numOfTriesAccomulate[2]},${numOfTriesAccomulate[3]},${numOfTriesAccomulate[4]},${numOfTriesAccomulate[5]}")
-//}
-//fun loadData(userSaveDataPath: String): Array<Any> {
-//  val saveFile = File(userSaveDataPath)
-//
-//}
+  if (saveFile.exists()) {
+    println("Guardando datos...")
+    saveFile.writeText("")
+    saveFile.appendText("${userStats[0]},${userStats[1]},${userStats[2]},${userStats[3]},${String.format("%.1f",userStats[4])}\n")
+    for (i in numOfTriesAccomulate.indices) {
+      if (i == numOfTriesAccomulate.lastIndex) saveFile.appendText("${numOfTriesAccomulate[i]}\n")
+      else saveFile.appendText("${numOfTriesAccomulate[i]},")
+    }
+    saveFile.appendText("${totalWords}\n")
+    for (word in wordsHistory) {
+      saveFile.appendText("${word[0].uppercase()},${word[1]},${word[2]}\n")
+    }
+    if (randomWord.isNotEmpty()) saveFile.appendText("${randomWord.capitalize()},$accessIndex,$numTries\n")
+  }
+  else println("Problema al guardar los datos. Restaurando último guardado...")
+
+}
+
+
+fun loadData(userSaveDataPath: String): MutableList<MutableList<String>> {
+  val saveFile = File(userSaveDataPath)
+  if (saveFile.exists()) {
+    println("Archivo de guardado encontrado, cargando datos...")
+    val userData = mutableListOf<MutableList<String>>()
+    for (line in saveFile.readLines()) {
+      val dataList = line.split(",")
+      userData.add(dataList.toMutableList())
+      println(dataList)
+    }
+    return userData
+  }
+ return mutableListOf()
+}
+
+fun updateDictionary(wordsData: MutableList<MutableList<String>>, dictionary: ArrayList<String>) {
+  for (wordData in wordsData) {
+    dictionary[wordData[1].toInt()] = ""
+  }
+}
+
+fun updateTriesRegistry(data:MutableList<String>, tries: IntArray) {
+  for (i in data.indices) {
+    numOfTriesAccomulate[i] = data[i].toInt()
+  }
+}

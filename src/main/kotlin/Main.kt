@@ -12,7 +12,7 @@ import kotlin.system.exitProcess
   en cas contrari haurà perdut la partida.
   S’ha d’anar mostrant, en tot moment, quines lletres s’han encertat en la posició, o s’han encertat, però no estan al lloc adient.
   Al joc original ho mostra en color verd i groc respectivament.
-  El jugador al final de la partida pot decidir si vol jugar una altra o no.
+  El jugador al final del joc pot decidir si vol jugar una altra partida o no.
  */
 
 /**
@@ -32,6 +32,19 @@ fun main() {
   if (userLoaded.isEmpty()) exitProcess(-1)
 
   println("Se ha cargado el usuario $userLoaded")
+  var userData = loadData("./savedata/${language}${userLoaded}.txt")
+  continuousGuessedWords = userData[0][0].toInt()
+  numberOfTotalGuessedWords = userData[0][1].toInt()
+  bestContinuousGuessedWords = userData[0][2].toInt()
+  currentNumberOfPlays = userData[0][3].toInt()
+  wordsPercentage = userData[0][4].toDouble()
+
+  updateTriesRegistry(userData[1], numOfTriesAccomulate)
+  totalWords = userData[2][0].toInt()
+  var wordsHistory = userData.subList(3, userData.lastIndex + 1)
+  updateDictionary(wordsHistory, dictionary)
+
+  println(dictionary)
   var userOptionMenu: Int
   do {
     showMenu(language, userLoaded)
@@ -42,14 +55,27 @@ fun main() {
         println("Lenguajes disponibles: ES(Español) - EN(Inglés) ")
         val newLanguageSelected = readln().trim().uppercase()
         language = changeLanguage(language, newLanguageSelected, dictionary)
+        userData = loadData("./savedata/${language}${userLoaded}.txt")
+        continuousGuessedWords = userData[0][0].toInt()
+        numberOfTotalGuessedWords = userData[0][1].toInt()
+        bestContinuousGuessedWords = userData[0][2].toInt()
+        currentNumberOfPlays = userData[0][3].toInt()
+        wordsPercentage = userData[0][4].toDouble()
+        updateTriesRegistry(userData[1], numOfTriesAccomulate)
+        wordsHistory = userData.subList(3, userData.lastIndex + 1)
+        updateDictionary(wordsHistory, dictionary)
       }
       2 -> {
         println("Introduce el nombre de usuario al que quieras cambiar:")
         val newUserSelected = readln().trim().lowercase()
         userLoaded = changeUser("./users/", userLoaded, newUserSelected)
       }
+      3 -> {
+        println("Mostrando histórico de palabras acertadas:")
+        printHistory(wordsHistory)
+      }
       0 -> println("Comenzando juego...")
-      else -> println("No existe esta opción. Vuelvélo a intentar:")
+      else -> println("No existe esta opción. Vuélvelo a intentar:")
     }
   }while(userOptionMenu != 0)
 
@@ -60,12 +86,9 @@ fun main() {
     do {
       randomWord = getRandomWord(dictionary)
     }while(randomWord.isEmpty()) //Anem seleccionant una paraula del diccionari fins que escollim una que no estigui buïda.
-    //println(dictionary) //debug
 
-//    //DEBUGGGGGGGGGGGG
-    //randomWord = "GORRA"
     //Marquem la paraula com a buïda per no tornar a seleccionar-la
-    var accessIndex = dictionary.indexOf(randomWord.lowercase()
+    val accessIndex = dictionary.indexOf(randomWord.lowercase()
       .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
     dictionary[accessIndex] = "" //Capitalitzem la paraula per a que coincideixi exactament amb el format de les paraules en el arxiu de lectura.
 
@@ -103,7 +126,7 @@ fun main() {
       }
       else {
         if (numTries == 6) {
-          //Reiniciem la ratxa d eparaules encertades.
+          //Reiniciem la ratxa de paraules encertades.
           continuousGuessedWords = 0
           printLoseMessage(randomWord)
         }
@@ -120,12 +143,19 @@ fun main() {
     showGameStatistics(currentNumberOfPlays, numberOfTotalGuessedWords, wordsPercentage, totalWords, continuousGuessedWords, bestContinuousGuessedWords)
 
     //Si el jugador ha endevinat la paraula actualitzem el comptador d'intents corresponent a la partida i actualitzem els valors de les mitjanes.
-    if (playerWins) {
-      calculateGameHistogram(medianOfTries, numOfTriesAccomulate, numTries, numberOfTotalGuessedWords)
-
-      //Enregistrem els pàràmetres de la partida al arxiu d'usuari corresponent.
-      //saveData()
-    }
+    if (playerWins) calculateGameHistogram(medianOfTries, numOfTriesAccomulate, numTries, numberOfTotalGuessedWords)
+    else randomWord = ""
+    //Enregistrem els pàràmetres de la partida actualitzats al arxiu d'usuari corresponent.
+    saveData(
+      "./savedata/${language}${userLoaded}.txt",
+      arrayOf(continuousGuessedWords, numberOfTotalGuessedWords, bestContinuousGuessedWords, currentNumberOfPlays, wordsPercentage),
+      numOfTriesAccomulate,
+      wordsHistory,
+      totalWords,
+      randomWord ,
+      accessIndex,
+      numTries
+    )
 
     showGameHistogram(medianOfTries, numOfTriesAccomulate, colors, numberOfTotalGuessedWords)
 

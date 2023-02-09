@@ -95,6 +95,7 @@ fun showMenu(language: String, userLoaded: String) {
     |=============MENU PRINCIPAL==========  
     |*1.CAMBIAR LENGUAJE DE LAS PALABRAS
     |*2.CAMBIAR USUARIO
+    |*3.VER PALABRAS ACERTADAS
     |*0.COMENZAR A JUGAR
     |=====================================
     """.trimMargin()
@@ -107,4 +108,10 @@ fun showMenu(language: String, userLoaded: String) {
 fun printCurrentState(language: String, userLoaded: String) {
   println("~~~USUARIO ACTUAL -> ${userLoaded}")
   println("~~~IDIOMA DE LAS PALABRAS ACTUAL -> ${language}")
+}
+
+fun printHistory(wordsData: MutableList<MutableList<String>>) {
+  for (wordData in wordsData) {
+    println("PALABRA ${wordData[0]} acertada en intento ${wordData[2]}")
+  }
 }
