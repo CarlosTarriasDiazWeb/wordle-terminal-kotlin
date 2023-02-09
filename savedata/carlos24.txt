@@ -1,7 +1,14 @@
+ES
 continuousGuessedWords:0
 numberOfTotalGuessedWords:0
 bestContinuousGuessedWords:0
 currentNumberOfPlays:0
 wordsPercentage:0.0
 numTriesAccomulate:0,0,0,0,0,0
-medianOfTries:0.0,0.0,0.0,0.0,0.0,0.0
+EN
+continuousGuessedWords:0
+numberOfTotalGuessedWords:0
+bestContinuousGuessedWords:0
+currentNumberOfPlays:0
+wordsPercentage:0.0
+numTriesAccomulate:0,0,0,0,0,0

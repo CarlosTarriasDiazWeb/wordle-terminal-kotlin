@@ -1,7 +1,4 @@
-import jdk.jfr.Percentage
-import org.intellij.lang.annotations.Language
 import java.io.File
-import java.nio.file.Path
 import java.util.Scanner
 import kotlin.io.path.*
 
@@ -11,14 +8,21 @@ import kotlin.io.path.*
  * @param dictionary ArrayList<String>: Estructura buïda que contindrá totes les paraules del joc.
  */
 fun loadFile(language: String, dictionary: ArrayList<String>) {
+  val languageToFile = mapOf<String, String>(
+    "ES" to "test1.txt",
+    "EN" to "test2.txt"
+  )
   if (language.isNotEmpty()) {
-    val fileName = if (language == "Espanyol") "test1.txt" else if (language == "Angles") "test2.txt" else ""
+    val fileName = languageToFile[language]
     val path = "src/main/kotlin/$fileName"
     val file = File(path)
-    if (file.isFile && file.exists()) {
+    if (file.isFile && file.exists() && file.length() > 0) {
       val lines: List<String> = file.readLines()
       lines.forEach { line -> dictionary.add(line) }
-      println(dictionary.size)
+      //println(dictionary.size) //debug
+    }
+    else {
+      println("Problema al cargar el diccionario de palabras. Cancelando operación...")
     }
   }
 }
@@ -30,75 +34,79 @@ fun loadFile(language: String, dictionary: ArrayList<String>) {
  */
 fun getRandomWord(dictionary: ArrayList<String>): String = dictionary[dictionary.indices.random()].uppercase()
 
-/**
- * Emplena el diccionari amb el nombre de vegades que apareix cada caràcter en la paraula seleccionada.
- * @param letterToCount MutableMap<Char,Int>: Diccionari buit que tindrá les ocurrències de cada caràcter.
- * @param randomWord String: Paraula aleatòria seleccionada de la partida actual.
- */
-fun setLetterToCount(letterToCount:MutableMap<Char,Int>, randomWord: String) {
-  if (randomWord.length == 5) {
-    for (c in randomWord) {
-      if (!letterToCount.containsKey(c)) {
-        letterToCount[c] = 1
-      }
-      else {
-        letterToCount[c] = letterToCount.getValue(c) + 1
-      }
-    }
-  }
-}
+
+//  var userLetter: String
+//  var guessWord = ""
+//  repeat(5) { index->
+//    println("Introduce la letra ${index + 1}")
+//    userLetter = readln().uppercase() //cal pasar-ho ja que la paraula generada està en majúscules.
+//    while (userLetter.isEmpty()){ //Mentre l'usuari no introdueixi res li anem demanant la lletra.
+//      println("Tienes que escribir algo...")
+//      userLetter = readln().uppercase()
+//    }
+//    if (userLetter.length > 1) { //Per controlar que només es recolli només un caràcter cada cop que demanem input al usuari.
+//      println("Has introducido más de un carácter. Se recogerá sólo el primero.")
+//      userLetter = userLetter.slice(0..0)
+//    }
+//    println("Ha introducido la letra $userLetter")
+//    guessWord += userLetter
+//  }
+//
+//  return guessWord
+//}
 
 /**
- * Processa la paraula que l'usuari introduirà com a resposta al intent.
+ * Processa la paraula que l'usuari introduirà com a resposta.
  * @return String : Paraula introduïda per l'usuari.
  */
-fun insertWord() : String {
-  var userLetter: String
-  var guessWord = ""
-  repeat(5) { index->
-    println("Introduce la letra ${index + 1}")
-    userLetter = readln().uppercase() //cal pasar-ho ja que la paraula generada està en majúscules.
-    while (userLetter.isEmpty()){ //Mentre l'usuari no introdueixi res li anem demanant la lletra.
-      println("Tienes que escribir algo...")
-      userLetter = readln().uppercase()
-    }
-    if (userLetter.length > 1) { //Per controlar que només es recolli només un caràcter cada cop que demanem input al usuari.
-      println("Has introducido más de un carácter. Se recogerá sólo el primero.")
-      userLetter = userLetter.slice(0..0)
-    }
-    println("Ha introducido la letra $userLetter")
-    guessWord += userLetter
+fun insertWord(): String {
+  var guessWord = readln().trim().uppercase()
+  while (guessWord.isEmpty() || guessWord.length > 5 || guessWord.length < 5){ //Mentre la longitud de la paraula no sigui vàlida li anem demanant la paraula al usuari.
+    println("La palabra tiene que tener 5 letras exactamente. Vuélvelo a intentar, por favor:")
+    guessWord = readln().trim().uppercase()
   }
-
   return guessWord
 }
 
 /**
- * Imprimeix per terminal la paraula que ha introduït el usuari amb els colors adients segons les regles del joc i conta el nombre de caràcters que coincideixen amb la paraula generada.
+ * Imprimeix per terminal la paraula que ha introduït el usuari amb els colors adients segons les regles del joc i compta el nombre de caràcters que coincideixen amb la paraula generada.
  * @param guessWord String: Paraula que ha introduït l'usuari.
  * @param randomWord String: Paraula aleatòria seleccionada de la partida actual.
- * @param letterToCount MutableMap<Char,Int>: Diccionari que té les ocurrències de cada caràcter.
  * @param colors MutableMap<String, String>: Diccionari que conté els colors que amb què es pintaran els caràcters.
  * @return Int : Nombre de caràcters correctes respecte la paraula original.
  */
-fun printWord(guessWord: String, randomWord: String, letterToCount: MutableMap<Char, Int>, colors: MutableMap<String, String>): Int {
+fun printWord(guessWord: String, randomWord: String, colors: MutableMap<String, String>): Int {
   var correctLetters = 0
+  val remainingLetters = randomWord.split("").toMutableList() //Array auxiliar per decidir quines lletres seran d'un color concret.
+
+  val letterToColor = mutableListOf<Array<String>>()
   for (i in guessWord.indices) {
-    //Per controlar el nombre de vegades que apareix un caràcter concret a la paraula tenim en compte el seu valor al diccionari
-    if (guessWord[i] == randomWord[i] && letterToCount.getValue(guessWord[i]) > 0){
-      printChar(colors["green"], colors["reset"], guessWord[i])
+    letterToColor.add(arrayOf(guessWord[i].toString(), "gray"))
+  }
+  //Primer comprovem les lletres que coincideixen en la mateixa posició que la paraula secreta.
+  for (i in guessWord.indices) {
+    if (guessWord[i] == randomWord[i]) {
+      val indexOfChar = remainingLetters.indexOf(guessWord[i].toString())
+      remainingLetters.removeAt(indexOfChar)
+      letterToColor[i][1]= "green"
       correctLetters++
-      //Controlem duplicitat del caràcter
-      letterToCount[guessWord[i]] = letterToCount.getValue(guessWord[i]) - 1
     }
-    else if (guessWord[i] in randomWord && letterToCount.getValue(guessWord[i]) > 0) {
-      printChar(colors["yellow"], colors["reset"], guessWord[i])
-      //Controlem duplicitat del caràcter
-      letterToCount[guessWord[i]] = letterToCount.getValue(guessWord[i]) - 1
+  }
+
+  //Després comprovem de les lletres que no coincideixen, quines estan incloses a la paraula secreta.
+  for (i in guessWord.indices) {
+    if (remainingLetters.contains(guessWord[i].toString()) && guessWord[i] != randomWord[i])
+    {
+      val indexOfChar = remainingLetters.indexOf(guessWord[i].toString())
+      remainingLetters.removeAt(indexOfChar)
+      letterToColor[i][1]= "yellow"
     }
-    else {
-      print("${guessWord[i]}")
-    }
+  }
+
+  //Pintem les lletres del color corresponent.
+  for (pair in letterToColor) {
+    if (pair[1] == "gray") print(pair[0])
+    else printChar(colors[pair[1]], colors["reset"], pair[0])
   }
 
   println("")
@@ -180,8 +188,8 @@ fun loadUser(folderRoute: String) : String {
       return createUser(folderRoute + "users.txt", scanner)
     }
 
-    //Si existeixen usuaris, càrreguem el primer usuari del primer fitxers de la carpeta users.
-    if (usersFiles[0].readLines().isNotEmpty()) { //Comprovem que hi hagi contigut al fitxer.
+    //Si existeixen usuaris, càrreguem el primer usuari del primer fitxer de la carpeta users.
+    if (usersFiles[0].readLines().isNotEmpty()) { //Comprovem que hi hagi contingut al fitxer.
       return usersFiles[0].readLines()[0]
     }
     println("El archivo de usuarios existe pero no constan usuarios")
@@ -220,15 +228,15 @@ fun createUser(userFileName: String, scanner: Scanner): String {
 /**
  * Se encarrega de cambiar l'idioma de les paraules del joc i carregar el diccionari corresponent
  */
-fun changeLanguage(language: String, dictionary: ArrayList<String>): String{
+fun changeLanguage(language: String, newLanguage: String, dictionary: ArrayList<String>): String{
+  val languages = setOf("ES", "EN")
   dictionary.clear()
-  val newLanguage : String
-  if (language == "Espanyol") {
-    newLanguage = "Angles"
-    loadFile(newLanguage, dictionary)
-    return newLanguage
+
+  if (newLanguage.isEmpty() || newLanguage !in languages) {
+    println("Ha habido un error al cambiar de lenguaje. Cancelando operación...")
+    return language
   }
-  newLanguage = "Espanyol"
+
   loadFile(newLanguage, dictionary)
   return newLanguage
 }
@@ -267,35 +275,58 @@ fun changeUser(folderRoute: String, currentUser: String, newUser: String): Strin
 //  }
 //}
 
-fun saveData(userSaveDataPath: String,
-             continuousGuessedWords:Int,
-             numberOfTotalGuessedWords: Int,
-             bestContinuousGuessedWords:Int,
-             currentnumberOfPlays:Int,
-             wordsPercentage: Double,
-             numOfTriesAccomulate: IntArray,
-             medianOfTries: DoubleArray
-          )
-{
-  val saveFile = File(userSaveDataPath)
-  if (!saveFile.exists()) {
-    saveFile.createNewFile()
-    saveFile.appendText("continuousGuessedWords:0\n")
-    saveFile.appendText("numberOfTotalGuessedWords:0\n")
-    saveFile.appendText("bestContinuousGuessedWords:0\n")
-    saveFile.appendText("currentNumberOfPlays:0\n")
-    saveFile.appendText("wordsPercentage:0.0\n")
-    saveFile.appendText("numTriesAccomulate:0,0,0,0,0,0")
-    saveFile.appendText("medianOfTries:0.0,0.0,0.0,0.0,0.0,0.0\n")
-  }
-  else {
-    saveFile.writeText("") //Limpiem fitxers
-    saveFile.appendText("continuousGuessedWords:${continuousGuessedWords}\n")
-    saveFile.appendText("numberOfTotalGuessedWords:${numberOfTotalGuessedWords}\n")
-    saveFile.appendText("bestContinuousGuessedWords:${bestContinuousGuessedWords}\n")
-    saveFile.appendText("currentNumberOfPlays:${currentnumberOfPlays}\n")
-    saveFile.appendText("wordsPercentage:${wordsPercentage}\n")
-    saveFile.appendText("numTriesAccomulate:${numOfTriesAccomulate[0]},${numOfTriesAccomulate[1]},0,0,0,0")
-    saveFile.appendText("medianOfTries:0.0,0.0,0.0,0.0,0.0,0.0\n")
-  }
-}
+//fun saveData(userSaveDataPath: String,
+//             continuousGuessedWords:Int,
+//             numberOfTotalGuessedWords: Int,
+//             bestContinuousGuessedWords:Int,
+//             currentnumberOfPlays:Int,
+//             wordsPercentage: Double,
+//             numOfTriesAccomulate: IntArray,
+//             lan: String
+//          )
+//{
+//  val saveFile = File(userSaveDataPath)
+//  val languages = arrayOf("ES", "EN")
+//
+//  if (!saveFile.exists()) {
+//    for (language in languages) {
+//      saveFile.createNewFile()
+//      saveFile.appendText("${language}\n")
+//      saveFile.appendText("continuousGuessedWords:0\n")
+//      saveFile.appendText("numberOfTotalGuessedWords:0\n")
+//      saveFile.appendText("bestContinuousGuessedWords:0\n")
+//      saveFile.appendText("currentNumberOfPlays:0\n")
+//      saveFile.appendText("wordsPercentage:0.0\n")
+//      saveFile.appendText("numTriesAccomulate:0,0,0,0,0,0")
+//    }
+//  }
+//  else {
+//      writeData(lan, saveFile, continuousGuessedWords, numberOfTotalGuessedWords, bestContinuousGuessedWords, currentnumberOfPlays, wordsPercentage, numOfTriesAccomulate)
+//  }
+//}
+//
+//fun writeData(language: String,
+//              saveFile: File,
+//              continuousGuessedWords:Int,
+//              numberOfTotalGuessedWords: Int,
+//              bestContinuousGuessedWords:Int,
+//              currentnumberOfPlays:Int,
+//              wordsPercentage: Double,
+//              numOfTriesAccomulate: IntArray)
+//{
+//  val lines = saveFile.readLines()
+//  val indexToWrite = lines.indexOf(language) + 1
+////  for (i in indexToWrite until  indexToWrite + 7) {
+////    lines[i] =
+////  }
+//  saveFile.appendText("continuousGuessedWords:${continuousGuessedWords}\n")
+//  saveFile.appendText("numberOfTotalGuessedWords:${numberOfTotalGuessedWords}\n")
+//  saveFile.appendText("bestContinuousGuessedWords:${bestContinuousGuessedWords}\n")
+//  saveFile.appendText("currentNumberOfPlays:${currentnumberOfPlays}\n")
+//  saveFile.appendText("wordsPercentage:${wordsPercentage}\n")
+//  saveFile.appendText("numTriesAccomulate:${numOfTriesAccomulate[0]},${numOfTriesAccomulate[1]},${numOfTriesAccomulate[2]},${numOfTriesAccomulate[3]},${numOfTriesAccomulate[4]},${numOfTriesAccomulate[5]}")
+//}
+//fun loadData(userSaveDataPath: String): Array<Any> {
+//  val saveFile = File(userSaveDataPath)
+//
+//}

@@ -1,7 +1,6 @@
-import java.nio.file.Path
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.io.path.*
+import kotlin.system.exitProcess
 
 //  Autor: Carlos Tarrias Diaz
 //  Projecte troncal M3 - Wordle
@@ -22,38 +21,49 @@ import kotlin.io.path.*
 fun main() {
 
   //============Array de paraules que tindrá el joc=======//
-  // Càrrega de diccionari de paraules en espanyol (per defecte ) mitjançant el fitxer corresponent.
+  // Càrrega de diccionari de paraules en espanyol (per defecte) mitjançant el fitxer corresponent.
   val dictionary = ArrayList<String>()
   loadFile(language, dictionary)
 
-  //Carga del primer usuari registrat
+  //Càrrega del primer usuari registrat.
   var userLoaded = loadUser("./users/")
-  if (userLoaded.isNotEmpty()) {
-    println("Se ha cargado el usuario $userLoaded")
-    var userOptionMenu: Int
-    do {
-      showMenu(language, userLoaded)
-      userOptionMenu = readln().toInt()
-      when(userOptionMenu) {
-        1 -> language = changeLanguage(language, dictionary)
-        2 -> {
-          println("Introduce el nombre de usuario al que quieras cambiar:")
-          val newUserSelected = readln()
-          userLoaded = changeUser("./users/", userLoaded, newUserSelected)
-        }
-        0 -> println("Comenzando juego...")
-        else -> println("No existe esta opción. Vuelvélo a intentar:")
-      }
-    }while(userOptionMenu != 0)
 
-  }
+  //Sortim del programa si hi ha cap error carregant l'usuari.
+  if (userLoaded.isEmpty()) exitProcess(-1)
+
+  println("Se ha cargado el usuario $userLoaded")
+  var userOptionMenu: Int
+  do {
+    showMenu(language, userLoaded)
+    userOptionMenu = readln().toInt()
+    when(userOptionMenu) {
+      1 -> {
+        println("Introduce el lenguaje al que quieres cambiar:")
+        println("Lenguajes disponibles: ES(Español) - EN(Inglés) ")
+        val newLanguageSelected = readln().trim().uppercase()
+        language = changeLanguage(language, newLanguageSelected, dictionary)
+      }
+      2 -> {
+        println("Introduce el nombre de usuario al que quieras cambiar:")
+        val newUserSelected = readln().trim().lowercase()
+        userLoaded = changeUser("./users/", userLoaded, newUserSelected)
+      }
+      0 -> println("Comenzando juego...")
+      else -> println("No existe esta opción. Vuelvélo a intentar:")
+    }
+  }while(userOptionMenu != 0)
+
+
 
   //Bucle principal del joc
   do {
     do {
       randomWord = getRandomWord(dictionary)
-    }while(randomWord.isEmpty()) //Anem seleccionant una paraula del diccionari fins que escollim una que no està buïda.
+    }while(randomWord.isEmpty()) //Anem seleccionant una paraula del diccionari fins que escollim una que no estigui buïda.
     //println(dictionary) //debug
+
+//    //DEBUGGGGGGGGGGGG
+    //randomWord = "GORRA"
     //Marquem la paraula com a buïda per no tornar a seleccionar-la
     var accessIndex = dictionary.indexOf(randomWord.lowercase()
       .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
@@ -62,30 +72,20 @@ fun main() {
     //Disminuim el nombre total de paraules del joc.
     totalWords--
 
-    //Creem diccionari amb ocurrències de cada caràcter per veure els que estan duplicats en cada intent.
-    setLetterToCount(letterToCount, randomWord)
-
     println(randomWord) //debug
 
     //Setejem intents inicials per a la nova partida.
     numTries = 0
-
     println("Intenta adivinar la palabra (son 5 letras!) ")
 
     //Bucle de la partida.
     do{
-      //Restaurem els valors inicials d'ocurrències de caràcters per al nou intent.
-      for (c in randomWord) {
-        letterToCount[c] = randomWord.count{it == c}
-      }
-
-      //println(letterToCount) //debug
 
       println("Te quedan ${6 - (numTries)} intentos")
 
       guessWord = insertWord()
 
-      correctLetters = printWord(guessWord, randomWord, letterToCount, colors)
+      correctLetters = printWord(guessWord, randomWord, colors)
 
       numTries++
 
@@ -99,8 +99,7 @@ fun main() {
         numberOfTotalGuessedWords++
 
         if (continuousGuessedWords > bestContinuousGuessedWords) bestContinuousGuessedWords = continuousGuessedWords
-        //Buidem el diccionari d'ocurrències per a que no s'acomulin a la següent partida.
-        letterToCount.clear()
+
       }
       else {
         if (numTries == 6) {
@@ -115,11 +114,8 @@ fun main() {
     //Actualitzem el nombre de partides guanyades.
     currentNumberOfPlays++
 
-    //Buidem el diccionari d'ocurrències per a que no s'acomulin a la següent partida.
-    letterToCount.clear()
-
     //Calculem nombre de paraules encertades respecte tot el diccionari de paraules.
-    wordsPercentage = (numberOfTotalGuessedWords/109.0)*100.0
+    wordsPercentage = (numberOfTotalGuessedWords/totalWords.toDouble())*100.0
 
     showGameStatistics(currentNumberOfPlays, numberOfTotalGuessedWords, wordsPercentage, totalWords, continuousGuessedWords, bestContinuousGuessedWords)
 

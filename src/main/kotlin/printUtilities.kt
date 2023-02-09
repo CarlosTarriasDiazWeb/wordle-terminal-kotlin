@@ -1,5 +1,3 @@
-import org.intellij.lang.annotations.Language
-
 /**
  * Mostra per terminal un missatge d'avís quan l'usuari ha esgotat tots els intents.
  * @param randomWord String: Paraula aleatòria seleccionada de la partida actual.
@@ -22,7 +20,7 @@ fun printLoseMessage(randomWord: String): Boolean {
  * @param char Char : Caràcter de la paraula introduïda.
  * @return Boolean: Control per indicar que s'ha mostrat correctament.
  */
-fun printChar(color: String?, reset: String?, char:Char): Boolean {
+fun printChar(color: String?, reset: String?, char: String): Boolean {
   if (!color.isNullOrEmpty() && !reset.isNullOrEmpty()) {
     print("$color$char$reset")
     return true
@@ -92,7 +90,7 @@ fun showGameHistogram(medianOfTries: DoubleArray,
  * Mostra el menú incial de l'aplicació.
  */
 fun showMenu(language: String, userLoaded: String) {
-  var menu =
+  val menu =
     """
     |=============MENU PRINCIPAL==========  
     |*1.CAMBIAR LENGUAJE DE LAS PALABRAS
