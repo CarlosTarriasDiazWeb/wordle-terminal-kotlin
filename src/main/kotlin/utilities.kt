@@ -244,50 +244,73 @@ fun changeUser(folderRoute: String, currentUser: String, newUser: String): Strin
   return currentUser
 }
 
-fun saveData(userSaveDataPath: String,
+fun saveWords(userWordsRoute:String,
+              wordsHistory:MutableList<MutableList<String>>,
+              randomWord: String,
+              accessIndex: Int,
+              numTries: Int
+)
+{
+  val userWordsFile = File(userWordsRoute)
+  if (!userWordsFile.exists()) userWordsFile.createNewFile()
+  userWordsFile.writeText("")
+  for (word in wordsHistory) {
+    userWordsFile.appendText("${word[0]},${word[1]},${word[2]}\n")
+  }
+  userWordsFile.appendText("$randomWord,$accessIndex,$numTries\n")
+}
+
+fun saveHistData(userSaveDataPath: String,
              userStats: Array<Any>,
              numOfTriesAccomulate: IntArray,
-             wordsHistory: MutableList<MutableList<String>>,
-             totalWords: Int,
-             randomWord: String,
-             accessIndex: Int,
-             numTries: Int
+             totalWords: Int
           )
 {
   val saveFile = File(userSaveDataPath)
-
-  if (saveFile.exists()) {
-    println("Guardando datos...")
-    saveFile.writeText("")
-    saveFile.appendText("${userStats[0]},${userStats[1]},${userStats[2]},${userStats[3]},${String.format("%.1f",userStats[4])}\n")
-    for (i in numOfTriesAccomulate.indices) {
-      if (i == numOfTriesAccomulate.lastIndex) saveFile.appendText("${numOfTriesAccomulate[i]}\n")
-      else saveFile.appendText("${numOfTriesAccomulate[i]},")
-    }
-    saveFile.appendText("${totalWords}\n")
-    for (word in wordsHistory) {
-      saveFile.appendText("${word[0].uppercase()},${word[1]},${word[2]}\n")
-    }
-    if (randomWord.isNotEmpty()) saveFile.appendText("${randomWord.capitalize()},$accessIndex,$numTries\n")
+  if (!saveFile.exists()) saveFile.createNewFile()
+  println("Guardando datos...")
+  saveFile.writeText("")
+  saveFile.appendText("${userStats[0]},${userStats[1]},${userStats[2]},${userStats[3]},${userStats[4]}\n")
+  for (i in numOfTriesAccomulate.indices) {
+    if (i == numOfTriesAccomulate.lastIndex) saveFile.appendText("${numOfTriesAccomulate[i]}\n")
+    else saveFile.appendText("${numOfTriesAccomulate[i]},")
   }
-  else println("Problema al guardar los datos. Restaurando último guardado...")
-
+  saveFile.appendText("${totalWords}\n")
 }
 
 
-fun loadData(userSaveDataPath: String): MutableList<MutableList<String>> {
+fun loadData(userSaveDataPath: String, option:String): MutableList<MutableList<String>> {
   val saveFile = File(userSaveDataPath)
+  val userData = mutableListOf<MutableList<String>>()
   if (saveFile.exists()) {
-    println("Archivo de guardado encontrado, cargando datos...")
-    val userData = mutableListOf<MutableList<String>>()
-    for (line in saveFile.readLines()) {
-      val dataList = line.split(",")
-      userData.add(dataList.toMutableList())
-      println(dataList)
+    when (option) {
+      "hist" -> {
+        println("Archivo de histórico encontrado, cargando datos...")
+      }
+      "save" -> {
+        println("Archivo de guardado encontrado, cargando datos...")
+      }
     }
-    return userData
+
   }
- return mutableListOf()
+  else {
+    println("No se ha encontrado archivo de $option. Creando archivo")
+    saveFile.createNewFile()
+    when (option) {
+      "hist" -> {
+        saveFile.appendText("0,0,0,0,0.0\n")
+        saveFile.appendText("0,0,0,0,0,0\n")
+        saveFile.appendText("218")
+      }
+    }
+  }
+
+  for (line in saveFile.readLines()) {
+    val dataList = line.split(",")
+    userData.add(dataList.toMutableList())
+    println(dataList)
+  }
+  return userData
 }
 
 fun updateDictionary(wordsData: MutableList<MutableList<String>>, dictionary: ArrayList<String>) {
@@ -298,6 +321,6 @@ fun updateDictionary(wordsData: MutableList<MutableList<String>>, dictionary: Ar
 
 fun updateTriesRegistry(data:MutableList<String>, tries: IntArray) {
   for (i in data.indices) {
-    numOfTriesAccomulate[i] = data[i].toInt()
+    tries[i] = data[i].toInt()
   }
 }

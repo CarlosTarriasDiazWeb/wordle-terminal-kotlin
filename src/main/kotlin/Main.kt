@@ -31,58 +31,68 @@ fun main() {
   //Sortim del programa si hi ha cap error carregant l'usuari.
   if (userLoaded.isEmpty()) exitProcess(-1)
 
-  println("Se ha cargado el usuario $userLoaded")
-  var userData = loadData("./savedata/${language}${userLoaded}.txt")
-  continuousGuessedWords = userData[0][0].toInt()
-  numberOfTotalGuessedWords = userData[0][1].toInt()
-  bestContinuousGuessedWords = userData[0][2].toInt()
-  currentNumberOfPlays = userData[0][3].toInt()
-  wordsPercentage = userData[0][4].toDouble()
-
-  updateTriesRegistry(userData[1], numOfTriesAccomulate)
-  totalWords = userData[2][0].toInt()
-  var wordsHistory = userData.subList(3, userData.lastIndex + 1)
-  updateDictionary(wordsHistory, dictionary)
-
-  println(dictionary)
-  var userOptionMenu: Int
-  do {
-    showMenu(language, userLoaded)
-    userOptionMenu = readln().toInt()
-    when(userOptionMenu) {
-      1 -> {
-        println("Introduce el lenguaje al que quieres cambiar:")
-        println("Lenguajes disponibles: ES(Español) - EN(Inglés) ")
-        val newLanguageSelected = readln().trim().uppercase()
-        language = changeLanguage(language, newLanguageSelected, dictionary)
-        userData = loadData("./savedata/${language}${userLoaded}.txt")
-        continuousGuessedWords = userData[0][0].toInt()
-        numberOfTotalGuessedWords = userData[0][1].toInt()
-        bestContinuousGuessedWords = userData[0][2].toInt()
-        currentNumberOfPlays = userData[0][3].toInt()
-        wordsPercentage = userData[0][4].toDouble()
-        updateTriesRegistry(userData[1], numOfTriesAccomulate)
-        wordsHistory = userData.subList(3, userData.lastIndex + 1)
-        updateDictionary(wordsHistory, dictionary)
-      }
-      2 -> {
-        println("Introduce el nombre de usuario al que quieras cambiar:")
-        val newUserSelected = readln().trim().lowercase()
-        userLoaded = changeUser("./users/", userLoaded, newUserSelected)
-      }
-      3 -> {
-        println("Mostrando histórico de palabras acertadas:")
-        printHistory(wordsHistory)
-      }
-      0 -> println("Comenzando juego...")
-      else -> println("No existe esta opción. Vuélvelo a intentar:")
-    }
-  }while(userOptionMenu != 0)
-
-
-
   //Bucle principal del joc
   do {
+
+    println("Se ha cargado el usuario $userLoaded")
+    var userData = loadData("./history/Hist${userLoaded}.txt", "hist")
+    continuousGuessedWords = userData[0][0].toInt()
+    numberOfTotalGuessedWords = userData[0][1].toInt()
+    bestContinuousGuessedWords = userData[0][2].toInt()
+    currentNumberOfPlays = userData[0][3].toInt()
+    wordsPercentage = userData[0][4].toDouble()
+
+    updateTriesRegistry(userData[1], numOfTriesAccomulate)
+    totalWords = userData[2][0].toInt()
+    var wordsHistory = loadData("./savedata/${language}${userLoaded}.txt", "save")
+    updateDictionary(wordsHistory, dictionary)
+
+    println(dictionary)
+
+    var userOptionMenu: Int
+    do {
+      showMenu(language, userLoaded)
+      userOptionMenu = readln().toInt()
+      when(userOptionMenu) {
+        1 -> {
+          println("Introduce el lenguaje al que quieres cambiar:")
+          println("Lenguajes disponibles: ES(Español) - EN(Inglés) ")
+          val newLanguageSelected = readln().trim().uppercase()
+          language = changeLanguage(language, newLanguageSelected, dictionary)
+          userData = loadData("./history/Hist${userLoaded}.txt", "hist")
+          continuousGuessedWords = userData[0][0].toInt()
+          numberOfTotalGuessedWords = userData[0][1].toInt()
+          bestContinuousGuessedWords = userData[0][2].toInt()
+          currentNumberOfPlays = userData[0][3].toInt()
+          wordsPercentage = userData[0][4].toDouble()
+          updateTriesRegistry(userData[1], numOfTriesAccomulate)
+          wordsHistory = loadData("./savedata/${language}${userLoaded}.txt", "save")
+          updateDictionary(wordsHistory, dictionary)
+        }
+        2 -> {
+          println("Introduce el nombre de usuario al que quieras cambiar:")
+          val newUserSelected = readln().trim().lowercase()
+          userLoaded = changeUser("./users/", userLoaded, newUserSelected)
+          userData = loadData("./history/Hist${userLoaded}.txt", "hist")
+          continuousGuessedWords = userData[0][0].toInt()
+          numberOfTotalGuessedWords = userData[0][1].toInt()
+          bestContinuousGuessedWords = userData[0][2].toInt()
+          currentNumberOfPlays = userData[0][3].toInt()
+          wordsPercentage = userData[0][4].toDouble()
+          updateTriesRegistry(userData[1], numOfTriesAccomulate)
+          totalWords = userData[2][0].toInt()
+          wordsHistory = loadData("./savedata/${language}${userLoaded}.txt", "save")
+          updateDictionary(wordsHistory, dictionary)
+        }
+        3 -> {
+          println("Mostrando histórico de palabras acertadas:")
+          printHistory(wordsHistory)
+        }
+        0 -> println("Comenzando juego...")
+        else -> println("No existe esta opción. Vuélvelo a intentar:")
+      }
+    }while(userOptionMenu != 0)
+
     do {
       randomWord = getRandomWord(dictionary)
     }while(randomWord.isEmpty()) //Anem seleccionant una paraula del diccionari fins que escollim una que no estigui buïda.
@@ -143,18 +153,16 @@ fun main() {
     showGameStatistics(currentNumberOfPlays, numberOfTotalGuessedWords, wordsPercentage, totalWords, continuousGuessedWords, bestContinuousGuessedWords)
 
     //Si el jugador ha endevinat la paraula actualitzem el comptador d'intents corresponent a la partida i actualitzem els valors de les mitjanes.
-    if (playerWins) calculateGameHistogram(medianOfTries, numOfTriesAccomulate, numTries, numberOfTotalGuessedWords)
-    else randomWord = ""
+    if (playerWins) {
+      calculateGameHistogram(medianOfTries, numOfTriesAccomulate, numTries, numberOfTotalGuessedWords)
+      saveWords("./savedata/${language}${userLoaded}.txt", wordsHistory, randomWord, accessIndex, numTries)
+    }
     //Enregistrem els pàràmetres de la partida actualitzats al arxiu d'usuari corresponent.
-    saveData(
-      "./savedata/${language}${userLoaded}.txt",
+    saveHistData(
+      "./history/Hist${userLoaded}.txt",
       arrayOf(continuousGuessedWords, numberOfTotalGuessedWords, bestContinuousGuessedWords, currentNumberOfPlays, wordsPercentage),
       numOfTriesAccomulate,
-      wordsHistory,
-      totalWords,
-      randomWord ,
-      accessIndex,
-      numTries
+      totalWords
     )
 
     showGameHistogram(medianOfTries, numOfTriesAccomulate, colors, numberOfTotalGuessedWords)

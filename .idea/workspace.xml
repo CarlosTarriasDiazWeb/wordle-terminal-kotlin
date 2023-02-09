@@ -4,18 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cf9d050-f16c-4cb7-b327-352f31bda76a" name="Changes" comment="Bugs corregits a l'hora de pintar els caràcters, eliminat diccionari d'ocurrències, millora en la funció d'introduir la paraula. Altres bugs.">
-      <change afterPath="$PROJECT_DIR$/savedata/ENcarlos24.txt" afterDir="false" />
+    <list default="true" id="5cf9d050-f16c-4cb7-b327-352f31bda76a" name="Changes" comment="Funcionalidad de carga de datos y de guardado de datos del usuario.">
+      <change afterPath="$PROJECT_DIR$/history/Histcarlos98.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/savedata/ENcarlos98.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/savedata/EScarlos98.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/MainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/MainKt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/PrintUtilitiesKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/PrintUtilitiesKt.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/UtilitiesKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/UtilitiesKt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/WordleVariablesKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/WordleVariablesKt.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab" afterDir="false" />
@@ -44,10 +45,11 @@
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/last-build.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/local-state/build-history.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/local-state/build-history.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/M3_UF1_PT_TarriasCarlos-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/M3_UF1_PT_TarriasCarlos-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/savedata/carlos24.txt" beforeDir="false" afterPath="$PROJECT_DIR$/savedata/EScarlos24.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/savedata/ENcarlos24.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/savedata/EScarlos24.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/printUtilities.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/printUtilities.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/utilities.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utilities.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/users/users.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,14 +91,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "settings.editor.selected.configurable": "Errors"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
@@ -134,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675950302110</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Funcionalidad de carga de datos y de guardado de datos del usuario.">
+      <created>1675958213248</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1675958213248</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -152,7 +161,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Funcionalitats de canvi d'usuari i de canvi de llenguatge implementades." />
     <MESSAGE value="Bugs corregits a l'hora de pintar els caràcters, eliminat diccionari d'ocurrències, millora en la funció d'introduir la paraula. Altres bugs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Bugs corregits a l'hora de pintar els caràcters, eliminat diccionari d'ocurrències, millora en la funció d'introduir la paraula. Altres bugs." />
+    <MESSAGE value="Funcionalidad de carga de datos y de guardado de datos del usuario." />
+    <option name="LAST_COMMIT_MESSAGE" value="Funcionalidad de carga de datos y de guardado de datos del usuario." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
