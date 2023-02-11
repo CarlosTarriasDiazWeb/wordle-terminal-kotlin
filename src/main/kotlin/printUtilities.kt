@@ -88,6 +88,8 @@ fun showGameHistogram(medianOfTries: DoubleArray,
 
 /**
  * Mostra el menú incial de l'aplicació.
+ * @param language String : Llenguatge actual del joc.
+ * @param userLoaded String : Usuari actual del joc.
  */
 fun showMenu(language: String, userLoaded: String) {
   val menu =
@@ -105,11 +107,20 @@ fun showMenu(language: String, userLoaded: String) {
   println("> Escoge una opción: ")
 }
 
+/**
+ * S'encarrega de mostrar quins són el llenguatges i l'usuari carregats actualment.
+ * @param language String : Llenguatge actual del joc.
+ * @param userLoaded String : Usuari actual del joc.
+ */
 fun printCurrentState(language: String, userLoaded: String) {
   println("~~~USUARIO ACTUAL -> ${userLoaded}")
   println("~~~IDIOMA DE LAS PALABRAS ACTUAL -> ${language}")
 }
 
+/**
+ * S'encarrega de mostrar les paraules del històric de l'usuari actual en el llenguatge concret.
+ * @param wordsData MutableList<MutableList<String>> : Estructura que conté les diferents paraules encertades amb el seu índex i intent corresponent.
+ */
 fun printHistory(wordsData: MutableList<MutableList<String>>) {
   for (wordData in wordsData) {
     println("PALABRA ${wordData[0]} acertada en intento ${wordData[2]}")

@@ -5,21 +5,23 @@ import kotlin.io.path.*
 /**
  * Emplena el diccionari de paraules a partir d'un fitxer extern.
  * @param language String: Representa l'idioma de les paraules amb les que juguem.
- * @param dictionary ArrayList<String>: Estructura buïda que contindrá totes les paraules del joc.
+ * @param dictionary ArrayList<String>: Estructura buïda que conté les paraules amb les que es jugarà al joc.
  */
 fun loadFile(language: String, dictionary: ArrayList<String>) {
+  //Correspondència idioma->arxiu de paraules.
   val languageToFile = mapOf(
     "ES" to "test1.txt",
     "EN" to "test2.txt"
   )
-  if (language.isNotEmpty()) {
+
+  //Si existeix la correspondència carreguem el diccionari corresponent.
+  if (language.isNotEmpty() && languageToFile[language] != null) {
     val fileName = languageToFile[language]
     val path = "src/main/kotlin/$fileName"
     val file = File(path)
-    if (file.isFile && file.exists() && file.length() > 0) {
+    if (file.isFile && file.exists() && file.length() > 0) { //Si el fitxer té contingut i existeix carreguem les paraules.
       val lines: List<String> = file.readLines()
       lines.forEach { line -> dictionary.add(line) }
-      //println(dictionary.size) //debug
     }
     else {
       println("Problema al cargar el diccionario de palabras. Cancelando operación...")
@@ -58,10 +60,12 @@ fun printWord(guessWord: String, randomWord: String, colors: MutableMap<String, 
   var correctLetters = 0
   val remainingLetters = randomWord.split("").toMutableList() //Array auxiliar per decidir quines lletres seran d'un color concret.
 
+  //Llista auxiliar per pintar caràcters al final.
   val letterToColor = mutableListOf<Array<String>>()
   for (i in guessWord.indices) {
     letterToColor.add(arrayOf(guessWord[i].toString(), "gray"))
   }
+
   //Primer comprovem les lletres que coincideixen en la mateixa posició que la paraula secreta.
   for (i in guessWord.indices) {
     if (guessWord[i] == randomWord[i]) {
@@ -72,7 +76,7 @@ fun printWord(guessWord: String, randomWord: String, colors: MutableMap<String, 
     }
   }
 
-  //Després comprovem de les lletres que no coincideixen, quines estan incloses a la paraula secreta.
+  //Després comprovem de les lletres que no coincideixen quines estan incloses a la paraula secreta.
   for (i in guessWord.indices) {
     if (remainingLetters.contains(guessWord[i].toString()) && guessWord[i] != randomWord[i])
     {
@@ -150,7 +154,7 @@ fun processUserInput(totalWords: Int): Int {
 
 /**
  * S'encarrega de retornar el usuari que jugarà al iniciar la partida (en cas que no el canviem en el menú). Pot ser un usuari
- * nou(en cas que no hagi cap registrat) o un que ja consti en el fitxers de usuaris.
+ * nou(en cas que no hagi cap registrat) o un que ja consti en el fitxers d'usuaris.
  * @param folderRoute String: Ruta de la carpeta del fitxer d'usuaris.
  * @return String : Cadena que representa l'usuari
  */
@@ -184,6 +188,7 @@ fun loadUser(folderRoute: String) : String {
 /**
  * S'encarrega d'afegir un nou usuari al sistema amb el nom que introdueixi l'usuari.
  * @param userFileName String: Nom del fitxer on s'emmagatzemen els diferents usuaris.
+ * @param scanner Scanner: Flux de dades d'entrada que introdueix l'usuari.
  * @return String : Nom de l'usuari creat.
  */
 fun createUser(userFileName: String, scanner: Scanner): String {
@@ -194,10 +199,12 @@ fun createUser(userFileName: String, scanner: Scanner): String {
   println("Por favor, introduce el nombre del nuevo usuario para poder jugar:")
 
   var userName = scanner.next().trim()
-  while (userName.isEmpty()) {
+  while (userName.isEmpty()) { //Anem demanant el nou usuari fins que tingui un valor.
     println("El nombre de usuario no puede estar vacío. Vuélvelo a intentar por favor:")
     userName = readln().trim()
   }
+
+  //Afegim el nom introduït al fitxer d'usuaris.
   val userFile = File(userFileName)
   userFile.createNewFile()
   userFile.appendText("${userName}\n")
@@ -205,45 +212,67 @@ fun createUser(userFileName: String, scanner: Scanner): String {
 }
 
 /**
- * Se encarrega de cambiar l'idioma de les paraules del joc i carregar el diccionari corresponent
+ * S'encarrega de cambiar l'idioma de les paraules del joc i carregar el diccionari corresponent.
+ * @param language String: Representa l'idioma de les paraules amb les que juguem actualment.
+ * @param newLanguage String: Nou idioma amb que volem jugar.
+ * @param dictionary ArrayList<String>: Conté les paraules del joc.
+ * @return String : El nou llenguatge escollit.
  */
 fun changeLanguage(language: String, newLanguage: String, dictionary: ArrayList<String>): String{
   val languages = setOf("ES", "EN")
-  dictionary.clear()
 
+  //Si el llenguatge introduït no consta en els llenguatges disponibles no fem res.
   if (newLanguage.isEmpty() || newLanguage !in languages) {
     println("Ha habido un error al cambiar de lenguaje. Cancelando operación...")
     return language
   }
 
+  //Actualitzem diccionari amb les paraules que queden per jugar en el llenguatge seleccionat.
+  dictionary.clear()
   loadFile(newLanguage, dictionary)
   return newLanguage
 }
 
+/**
+ * Canvia l'usuari actual per un altre usuari que introduïm per terminal.
+ * @param folderRoute String: Representa la ruta cap a la carpeta d'usuaris.
+ * @param currentUser String: Usuari actual del joc.
+ * @param newUser String: Usuari al que volem canviar.
+ */
 fun changeUser(folderRoute: String, currentUser: String, newUser: String): String {
   val folder = File(folderRoute)
   var lines: List<String>
+  //Si la carpeta d'usuaris no existeix o no hi han fitxers d'usuari no fem res
   if (!folder.exists() || folder.listFiles().isEmpty()) {
     println("Problema con el archivo de usuarios. Cancelando operación...")
     return currentUser
   }
 
+  //Cerquem pels arxius d'usuari l'usuari al que volem canviar.
   for (file in folder.listFiles()) {
-    if (file.length() > 0) {
+    if (file.length() > 0) { //Si té contingut, llegim usuaris.
       lines = file.readLines()
       for (line in lines) {
-        if (line == newUser) {
+        if (line == newUser) { //Si el trobem, fem el canvi.
           println("Usuario $newUser encontrado. Actualizando información...")
           return newUser
         }
       }
     }
-    else continue
+    else continue //Seguim cercant...
   }
   println("No se ha encontrado el usuario seleccionado. Cancelando operación...")
   return currentUser
 }
 
+/**
+ * Actualitza l'històric de paraules encertades del usuari que està jugant actualment.
+ * @param userWordsRoute String : Ruta cap al arxiu d'històric de paraules del usuari concret.
+ * @param wordsHistory MutableList<MutableList<String>> : Estructura que conté les diferents paraules encertades amb el seu índex i intent corresponent.
+ * @param randomWord String : Nova paraula que ha encertat l'usuari.
+ * @param accessIndex Int : Índex on es troba la paraula en el seu diccionari.
+ * @param numTries Int : Número d'intents que ha costat encertar la paraula secreta actual.
+ */
 fun saveWords(userWordsRoute:String,
               wordsHistory:MutableList<MutableList<String>>,
               randomWord: String,
@@ -253,6 +282,7 @@ fun saveWords(userWordsRoute:String,
 {
   val userWordsFile = File(userWordsRoute)
   if (!userWordsFile.exists()) userWordsFile.createNewFile()
+  //Netejem i sobreescrivim l'històric de paraules.
   userWordsFile.writeText("")
   for (word in wordsHistory) {
     userWordsFile.appendText("${word[0]},${word[1]},${word[2]}\n")
@@ -260,6 +290,13 @@ fun saveWords(userWordsRoute:String,
   userWordsFile.appendText("$randomWord,$accessIndex,$numTries\n")
 }
 
+/**
+ * Actualitza les dades estadístiques del jugador.
+ * @param userSaveDataPath String : Ruta cap al arxiu d'estadñistiques del usuari.
+ * @param userStats Array<Any> : Dades estadístiques després de jugar la partida (que volem escriure al fitxer).
+ * @param numOfTriesAccomulate IntArray : Emmagatzema el total de paraules que s'han encertat per 1..6 intents respectivament.
+ * @param totalWords Int : Nombre de paraules amb que pot jugar l'usuari.
+ */
 fun saveHistData(userSaveDataPath: String,
              userStats: Array<Any>,
              numOfTriesAccomulate: IntArray,
@@ -270,19 +307,27 @@ fun saveHistData(userSaveDataPath: String,
   if (!saveFile.exists()) saveFile.createNewFile()
   println("Guardando datos...")
   saveFile.writeText("")
+  //Escrivim la primera línia amb els camps estadístics.
   saveFile.appendText("${userStats[0]},${userStats[1]},${userStats[2]},${userStats[3]},${userStats[4]}\n")
+  //Escrivim la segona línia amb els intents acomulats.
   for (i in numOfTriesAccomulate.indices) {
     if (i == numOfTriesAccomulate.lastIndex) saveFile.appendText("${numOfTriesAccomulate[i]}\n")
     else saveFile.appendText("${numOfTriesAccomulate[i]},")
   }
+  //Escrivim la tercera línia amb les paraules totals restants del joc.
   saveFile.appendText("${totalWords}\n")
 }
 
-
+/**
+ * Per carregar dades d'històric o dades estadístiques al joc i poder actualitzar l'estat del joc per a l'usuari actual.
+ * @param userSaveDataPath String : Representa la ruta cap al arxiu d'històric o de dades del usuari actual.
+ * @param option String : Per indicar si carreguem dades històriques o dades estadístiques.
+ * @return MutableList<MutableList<String>> : Estructura que conté les dades que s'han llegit.
+ */
 fun loadData(userSaveDataPath: String, option:String): MutableList<MutableList<String>> {
   val saveFile = File(userSaveDataPath)
   val userData = mutableListOf<MutableList<String>>()
-  if (saveFile.exists()) {
+  if (saveFile.exists()) { //Si tenim dades estadístiques o de historial mostrem missatge respectiu.
     when (option) {
       "hist" -> {
         println("Archivo de histórico encontrado, cargando datos...")
@@ -293,7 +338,7 @@ fun loadData(userSaveDataPath: String, option:String): MutableList<MutableList<S
     }
 
   }
-  else {
+  else { //Si l'usuari no té fitxer de dades estadístiques creem un de nou amb dades inicialitzades a 0.
     println("No se ha encontrado archivo de $option. Creando archivo")
     saveFile.createNewFile()
     when (option) {
@@ -302,9 +347,11 @@ fun loadData(userSaveDataPath: String, option:String): MutableList<MutableList<S
         saveFile.appendText("0,0,0,0,0,0\n")
         saveFile.appendText("218")
       }
+      //No fa falta posar valors per defecte als arxius d'històric de paraules encertades, pot estar buit.
     }
   }
 
+  //Retornem l'estructura amb les dades que s'han carregat per poder actualitzar l'estat del joc per l'usuari actual.
   for (line in saveFile.readLines()) {
     val dataList = line.split(",")
     userData.add(dataList.toMutableList())
@@ -313,12 +360,22 @@ fun loadData(userSaveDataPath: String, option:String): MutableList<MutableList<S
   return userData
 }
 
+/**
+ * Actualitza el diccionari amb les paraules que es por jugar (és a dir, les que ja han sigut jugades les substituïm per "").
+ * @param wordsHistory MutableList<MutableList<String>> : Estructura que conté les diferents paraules encertades amb el seu índex i intent corresponent.
+ * @param dictionary ArrayList<String>: Conté les paraules del joc.
+ */
 fun updateDictionary(wordsData: MutableList<MutableList<String>>, dictionary: ArrayList<String>) {
   for (wordData in wordsData) {
     dictionary[wordData[1].toInt()] = ""
   }
 }
 
+/**
+ * Actualitza les paraules encertades en l'intent corresponent per a la nova partida.
+ * @param data MutableList<String> : Estructura que conté les paraules encertades en un intent concret de les partides anteriors.
+ * @param tries IntArray : Conté les paraules encertades en un intent concret per a la nova partida.
+ */
 fun updateTriesRegistry(data:MutableList<String>, tries: IntArray) {
   for (i in data.indices) {
     tries[i] = data[i].toInt()
