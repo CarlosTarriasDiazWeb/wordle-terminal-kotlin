@@ -34,7 +34,10 @@ fun loadFile(language: String, dictionary: ArrayList<String>) {
  * @param dictionary ArrayList<String>: Conté totes les paraules del joc.
  * @return String : Paraula aleatòria del diccionari.
  */
-fun getRandomWord(dictionary: ArrayList<String>): String = dictionary[dictionary.indices.random()].uppercase()
+fun getRandomWord(dictionary: ArrayList<String>): String {
+  if (dictionary.isEmpty()) return ""
+  return dictionary[dictionary.indices.random()].uppercase()
+}
 
 /**
  * Processa la paraula que l'usuari introduirà com a resposta.
@@ -159,6 +162,7 @@ fun processUserInput(totalWords: Int): Int {
  * @return String : Cadena que representa l'usuari
  */
 fun loadUser(folderRoute: String) : String {
+  if (folderRoute.isEmpty()) return ""
   val usersRoute = Path(folderRoute)
   if (usersRoute.exists()) {
     val usersFiles = usersRoute.listDirectoryEntries()
@@ -224,6 +228,11 @@ fun changeLanguage(language: String, newLanguage: String, dictionary: ArrayList<
   //Si el llenguatge introduït no consta en els llenguatges disponibles no fem res.
   if (newLanguage.isEmpty() || newLanguage !in languages) {
     println("Ha habido un error al cambiar de lenguaje. Cancelando operación...")
+    return language
+  }
+
+  if (newLanguage == language) {
+    println("Se ha seleccionado el mismo lenguaje. Ningún cambio producido")
     return language
   }
 
@@ -325,6 +334,10 @@ fun saveHistData(userSaveDataPath: String,
  * @return MutableList<MutableList<String>> : Estructura que conté les dades que s'han llegit.
  */
 fun loadData(userSaveDataPath: String, option:String): MutableList<MutableList<String>> {
+
+  //Si la ruta no es válida no carreguem res.
+//  if (!userSaveDataPath.contains("./savedata/") || !userSaveDataPath.contains("./history/")) return mutableListOf()
+
   val saveFile = File(userSaveDataPath)
   val userData = mutableListOf<MutableList<String>>()
   if (saveFile.exists()) { //Si tenim dades estadístiques o de historial mostrem missatge respectiu.

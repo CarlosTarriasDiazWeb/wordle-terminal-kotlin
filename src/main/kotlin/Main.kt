@@ -35,6 +35,9 @@ fun main() {
     println("Se ha cargado el usuario $userLoaded")
     var userData = loadData("./history/Hist${userLoaded}.txt", "hist")
 
+    //Sortim del programa si hi ha cap error carregant les dades estadístiques (el fitxer ha de contenir dades).
+    if (userData.isEmpty()) exitProcess(-1)
+
     //Es carreguen les dades del usuari per defecte o el nou usuari creat(seran dades a 0), segons el cas.
     //Càrrega d'estadístiques.
     continuousGuessedWords = userData[0][0].toInt()

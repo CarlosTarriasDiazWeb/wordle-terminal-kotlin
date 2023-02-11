@@ -99,7 +99,7 @@ totes les lletres de l’abecedari i sense possibilitat de repetició.
     - Les funcionalitats esmentades s'han modularitzat en funcions. Per una banda, tenim les funcions que controlen la lògica
     del joc, i, per altra banda, tenim les funcions auxiliars per mostrar dades (paraules, estadístiques del joc,...) al terminal.
     - Hem utilitzat el framework de testing JUnit versió 5 per realitzar els tests unitaris a les diferents funcions.
-    - Tenim els tests de les funcions principals i els tests de les funcions auxiliars per imprimir per pantalla.
+    - Tenim els tests de les funcions principals del joc (excepte les funcions auxiliar per imprimir per pantalla).
       >Document HTML dels resultats de testing: build/reports/tests/test/index.html  
     - Per documentar cada funció, hem fet servir el plugin de Dokka.
       >Document HTML de la documentació generada: build/dokka/index.html
