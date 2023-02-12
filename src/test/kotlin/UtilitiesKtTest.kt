@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import java.util.*
-import kotlin.collections.ArrayList
+import java.io.File
 
 internal class UtilitiesKtTest {
 
@@ -103,7 +102,7 @@ internal class UtilitiesKtTest {
     assertFalse(playerWins(correctLetters))
   }
 
-  //calculateGameHistogram Tests
+  //calculateGameHistogram() Tests
   @Test
   fun checkIfNumberOfTotalGuessedWordsIsZeroStatisticsAreEmpty() {
     calculateGameHistogram(medianOfTries, numOfTriesAccomulate, 3, 0)
@@ -150,7 +149,7 @@ internal class UtilitiesKtTest {
 
   //changeLanguage() Tests
   @Test
-  fun checkThatReturnsNewLanguageIfNewLanguageIsExists() {
+  fun checkThatReturnsNewLanguageIfNewLanguageExists() {
     val language = "ES"
     loadFile(language, dictionary)
     val newLanguage = changeLanguage("ES", "EN",dictionary)
@@ -181,23 +180,115 @@ internal class UtilitiesKtTest {
   }
 
   //changeUser() Tests
-  //savewords() Tests
+  @Test
+  fun checkThatReturnsCurrentUserIfNewUserIsEqualToCurrentUser() {
+    val user = "carlos98"
+    val newUser = "carlos98"
+    val resultUser = changeUser("./users/users.txt", user, newUser)
+    assertEquals(resultUser, user)
+  }
+  @Test
+  fun checkThatReturnsCurrentUserIfNewUserDoesNotExists() {
+    val user = "carlos98"
+    val newUser = "nonuser"
+    val resultUser = changeUser("./users/users.txt", user, newUser)
+    assertEquals(resultUser, user)
+  }
+  @Test
+  fun checkThatReturnsCurrentUserIfRouteDoesNotExists() {
+    val user = "carlos98"
+    val newUser = "red20"
+    val resultUser = changeUser("./users/nonexistent.txt", user, newUser)
+    assertEquals(resultUser, user)
+  }
+  @Test
+  fun checkThatReturnsCurrentUserIfNewuserIsEmpty() {
+    val user = "carlos98"
+    val newUser = ""
+    val resultUser = changeUser("./users/users.txt", user, newUser)
+    assertEquals(resultUser, user)
+  }
+
+  //saveWords() Tests
+  @Test
+  fun checkWordsHistHasContentWhenWordProvided() {
+    val wordsHistoryTest = mutableListOf(mutableListOf("ACERA","0","2"), mutableListOf("ALBOR","1","4") )
+    saveWords("./savedata/EStest.txt", wordsHistoryTest, "ATLAS", 4, 3)
+    assertTrue(File("./savedata/EStest.txt").length() > 0)
+  }
+
   //saveHistData() Tests
+  @Test
+  fun checkSavedDataHasContentWhenDataIsProvided() {
+    val testUserStats: Array<Any> = arrayOf(2,2,2,3,0.12)
+    val testNumOfTriesAccomulate = intArrayOf(1,1,0,0,0,0)
+    saveHistData("./history/Histtest.txt", testUserStats, testNumOfTriesAccomulate, 216)
+    assertTrue(File("./history/Histtest.txt").length() > 0)
+  }
+
   //loadData() Tests
+  @Test
+  fun checkThatDefaultStatsDataIsLoadedIfHistFileNotExists() {
+    val data = loadData("./history/Histuser.txt", "hist")
+    assertTrue(data.size > 0)
+  }
+  @Test
+  fun checkThatWordsHistDataIsEmptyIfPathNotExists() {
+    val data = loadData("./history/ESuser98.txt", "save")
+    assertTrue(data.size == 0)
+  }
 
-//  @Test
-//  fun checkThatDoesNotLoadDataIfPathIsNotValid() {
-//    val data = loadData("./wrongPath", "hist")
-//    assertTrue(data.size == 0)
-//  }
-//
-//  @Test
-//  fun checkThatStatsDataIsLoadedIfPathIsValid() {
-//    val data = loadData("./history/Histcarlos98.txt", "hist")
-//    assertTrue(data.size > 0)
-//  }
   //updateDictionary() Tests
-  //updateTriesRegistry() Tests
+  @Test
+  fun checkIfWordsHistoryHasDataDictionaryHasSomePlayedWords() {
+    loadFile("ES", dictionary)
+    val testWordsData = mutableListOf(mutableListOf("BALDE","8","1"), mutableListOf("MANDA", "67", "1"))
+    updateDictionary(testWordsData, dictionary)
+    assertTrue(dictionary.any { it == "" })
+  }
+  @Test
+  fun checkIfWordsHistoryHasNoDataDictionaryHasNotPlayedWords() {
+    loadFile("ES", dictionary)
+    val testWordsData = mutableListOf<MutableList<String>>()
+    updateDictionary(testWordsData, dictionary)
+    assertTrue(dictionary.all { it != "" })
+  }
+  @Test
+  fun checkIfWordsHistoryHasDataDictionaryHasThatWordEmpty() {
+    loadFile("ES", dictionary)
+    val testWordsData = mutableListOf(mutableListOf("BALDE","8","1"))
+    updateDictionary(testWordsData, dictionary)
+    assertTrue(dictionary[8] == "")
+  }
+  @Test
+  fun checkIfWordHistoryHasAllWordsDictionaryHasAllWordsEmpty() {
+    val testDictionary = ArrayList<String>()
+    testDictionary.add("Acera")
+    testDictionary.add("Albor")
+    val testWordsData = mutableListOf(mutableListOf("ACERA","0","2"), mutableListOf("ALBOR","1","4") )
+    updateDictionary(testWordsData, testDictionary)
+    assertTrue(testDictionary.all { it == ""})
+  }
 
+  //updateTriesRegistry() Tests
+  @Test
+  fun checkTriesAccomulateHasUpdatedContentOnceDataLoaded() {
+    val testData = mutableListOf("2","3","1","1","0","0")
+    val testTries = intArrayOf(1,3,1,1,0,0)
+    var correctDataCounter = 0
+    updateTriesRegistry(testData, testTries)
+    for (i in testTries.indices) {
+      if (testTries[i].toString() == testData[i]) correctDataCounter++
+    }
+    assertEquals(correctDataCounter, 6)
+  }
+  @Test
+  fun checkTriesAccomulateIsTheSameIfDataLoadedIsEmpty() {
+    val testData = mutableListOf<String>()
+    val testTries = intArrayOf(1,3,1,1,0,0)
+    val testTriesAux = testTries.clone()
+    updateTriesRegistry(testData, testTries)
+    assertTrue(testTries.contentEquals(testTriesAux))
+  }
 
 }

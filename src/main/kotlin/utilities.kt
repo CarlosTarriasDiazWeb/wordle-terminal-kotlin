@@ -252,13 +252,13 @@ fun changeUser(folderRoute: String, currentUser: String, newUser: String): Strin
   val folder = File(folderRoute)
   var lines: List<String>
   //Si la carpeta d'usuaris no existeix o no hi han fitxers d'usuari no fem res
-  if (!folder.exists() || folder.listFiles().isEmpty()) {
+  if (!folder.exists() || folder.listFiles().isNullOrEmpty()) {
     println("Problema con el archivo de usuarios. Cancelando operación...")
     return currentUser
   }
 
   //Cerquem pels arxius d'usuari l'usuari al que volem canviar.
-  for (file in folder.listFiles()) {
+  for (file in folder.listFiles()!!) {
     if (file.length() > 0) { //Si té contingut, llegim usuaris.
       lines = file.readLines()
       for (line in lines) {
@@ -368,14 +368,13 @@ fun loadData(userSaveDataPath: String, option:String): MutableList<MutableList<S
   for (line in saveFile.readLines()) {
     val dataList = line.split(",")
     userData.add(dataList.toMutableList())
-    println(dataList)
   }
   return userData
 }
 
 /**
  * Actualitza el diccionari amb les paraules que es por jugar (és a dir, les que ja han sigut jugades les substituïm per "").
- * @param wordsHistory MutableList<MutableList<String>> : Estructura que conté les diferents paraules encertades amb el seu índex i intent corresponent.
+ * @param wordsData MutableList<MutableList<String>> : Estructura que conté les diferents paraules encertades amb el seu índex i intent corresponent.
  * @param dictionary ArrayList<String>: Conté les paraules del joc.
  */
 fun updateDictionary(wordsData: MutableList<MutableList<String>>, dictionary: ArrayList<String>) {

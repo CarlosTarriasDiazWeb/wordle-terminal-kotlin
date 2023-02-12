@@ -1,98 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="UtilitiesKtTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2023-02-07T18:36:09" hostname="LAPTOP-MCV0VM2C" time="0.028">
+<testsuite name="UtilitiesKtTest" tests="41" skipped="0" failures="0" errors="0" timestamp="2023-02-12T10:57:44" hostname="LAPTOP-MCV0VM2C" time="0.196">
   <properties/>
-  <testcase name="checkThatReturnUserNameIfUserFileNameIsNotEmpty()" classname="UtilitiesKtTest" time="0.028">
-    <failure message="java.util.NoSuchElementException" type="java.util.NoSuchElementException">java.util.NoSuchElementException
-	at java.base/java.util.Scanner.throwFor(Scanner.java:937)
-	at java.base/java.util.Scanner.next(Scanner.java:1478)
-	at UtilitiesKt.createUser(utilities.kt:202)
-	at UtilitiesKtTest.checkThatReturnUserNameIfUserFileNameIsNotEmpty(UtilitiesKtTest.kt:157)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:725)
-	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
-	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
-	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
-	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:214)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:210)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:135)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:66)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:99)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:79)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:75)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
-	at jdk.proxy1/jdk.proxy1.$Proxy2.stop(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:193)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
-	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:133)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
-	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
-	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-</failure>
-  </testcase>
-  <system-out><![CDATA[Por favor, introduce el nombre del nuevo usuario para poder jugar:
+  <testcase name="checkIfAllWordOfDictionaryAreValidWhenLanguageIsSpanish()" classname="UtilitiesKtTest" time="0.032"/>
+  <testcase name="checkIfLosesIfCorrectLettersIsNotFive()" classname="UtilitiesKtTest" time="0.044"/>
+  <testcase name="checkIfAllWordOfDictionaryAreValidWhenLanguageIsEnglish()" classname="UtilitiesKtTest" time="0.002"/>
+  <testcase name="checkThatAreZeroCorrectLettersIfGuessWordDoesNotMatchSecretWord()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkThatReturnsCurrentUserIfNewuserIsEmpty()" classname="UtilitiesKtTest" time="0.002"/>
+  <testcase name="checkThatWordsHistDataIsEmptyIfPathNotExists()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkThatReturnsCurrentUserIfNewUserIsEqualToCurrentUser()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkThatReturnsEmptyUserNameIfRouteNotExists()" classname="UtilitiesKtTest" time="0.004"/>
+  <testcase name="checkIfWordsHistoryHasNoDataDictionaryHasNotPlayedWords()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkTriesAccomulateIsTheSameIfDataLoadedIsEmpty()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfTriesIsInvalidStatisticsAreEmpty()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkThatReturnsCurrentUserIfNewUserDoesNotExists()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfNumberOfTotalGuessedWordsIsZeroStatisticsAreEmpty()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkWordsHistHasContentWhenWordProvided()" classname="UtilitiesKtTest" time="0.008"/>
+  <testcase name="checkThatReturnsCurrentUserIfRouteDoesNotExists()" classname="UtilitiesKtTest" time="0.002"/>
+  <testcase name="checkIfParamsAreValidStatisticsIsNotEmpty()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfDictionaryIsEmptyWhenLanguageDoesntExistInAvailableLanguages()" classname="UtilitiesKtTest" time="0.0"/>
+  <testcase name="checkThatReturnsEmptyUserNameIfRouteIsEmpty()" classname="UtilitiesKtTest" time="0.0"/>
+  <testcase name="checkThatReturnsUserNameIfRouteIsCorrect()" classname="UtilitiesKtTest" time="0.009"/>
+  <testcase name="checkTriesAccomulateHasUpdatedContentOnceDataLoaded()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfRandomWordIsEmptyIfDictionaryIsEmpty()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkThatAreCorrectLettersIfGuessWordResemblesSecretWord()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfWinsIfCorrectLettersEqualsFive()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkThatReturnsCurrentLanguageIfNewLanguageDoesNotExist()" classname="UtilitiesKtTest" time="0.011"/>
+  <testcase name="checkThatReturnsCurrentLanguageIfNewLanguageIsEmpty()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkThatAreNotCorrectLettersIfGuessWordHasSameLettersButNotInOrder()" classname="UtilitiesKtTest" time="0.002"/>
+  <testcase name="checkSavedDataHasContentWhenDataIsProvided()" classname="UtilitiesKtTest" time="0.014"/>
+  <testcase name="checkIfDictionaryIsEmptyWhenLanguageNotProvided()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfAllWordsOfDictionaryAreLoadedWhenLanguageIsSpanish()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfRandomWordIsValidInSpanishDictionary()" classname="UtilitiesKtTest" time="0.007"/>
+  <testcase name="checkThatReturnsNewLanguageIfNewLanguageExists()" classname="UtilitiesKtTest" time="0.002"/>
+  <testcase name="checkIfWordsHistoryHasDataDictionaryHasSomePlayedWords()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfAllWordsOfDictionaryAreLoadedWhenLanguageIsEnglish()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfWordHistoryHasAllWordsDictionaryHasAllWordsEmpty()" classname="UtilitiesKtTest" time="0.0"/>
+  <testcase name="checkThatDefaultStatsDataIsLoadedIfHistFileNotExists()" classname="UtilitiesKtTest" time="0.006"/>
+  <testcase name="checkIfParamsAreInvalidStatisticsIsEmpty()" classname="UtilitiesKtTest" time="0.0"/>
+  <testcase name="checkThatReturnsCurrentLanguageIfNewLanguagesIsEqualToCurrentLanguage()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkThatAreFiveCorrectLettersIfGuessWordMatchesSecretWord()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfRandomWordIsValidInEnglishDictionary()" classname="UtilitiesKtTest" time="0.001"/>
+  <testcase name="checkIfMediansAreValidIfParamsAreValid()" classname="UtilitiesKtTest" time="0.0"/>
+  <testcase name="checkIfWordsHistoryHasDataDictionaryHasThatWordEmpty()" classname="UtilitiesKtTest" time="0.001"/>
+  <system-out><![CDATA[?[32mG?[0m?[32mO?[0mT?[33mA?[0mS
+LUPIN
+Problema con el archivo de usuarios. Cancelando operación...
+No se ha encontrado archivo de save. Creando archivo
+Problema con el archivo de usuarios. Cancelando operación...
+Ha habido un problema a la hora de comprobar la carpeta de usuarios
+Problema con el archivo de usuarios. Cancelando operación...
+Problema con el archivo de usuarios. Cancelando operación...
+?[32mG?[0m?[32mO?[0mT?[33mA?[0mS
+?[32mG?[0m?[32mO?[0m?[32mR?[0m?[32mR?[0m?[32mA?[0m
+Ha habido un error al cambiar de lenguaje. Cancelando operación...
+Ha habido un error al cambiar de lenguaje. Cancelando operación...
+?[33mR?[0m?[33mR?[0m?[33mA?[0m?[33mG?[0m?[33mO?[0m
+Guardando datos...
+No se ha encontrado archivo de hist. Creando archivo
+Se ha seleccionado el mismo lenguaje. Ningún cambio producido
+?[32mG?[0m?[32mO?[0m?[32mR?[0m?[32mR?[0m?[32mA?[0m
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

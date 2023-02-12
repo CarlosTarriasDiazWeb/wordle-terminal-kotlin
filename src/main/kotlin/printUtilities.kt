@@ -1,3 +1,5 @@
+import java.io.File
+
 /**
  * Mostra per terminal un missatge d'avís quan l'usuari ha esgotat tots els intents.
  * @param randomWord String: Paraula aleatòria seleccionada de la partida actual.
@@ -94,6 +96,10 @@ fun showGameHistogram(medianOfTries: DoubleArray,
 fun showMenu(language: String, userLoaded: String) {
   val menu =
     """
+    || | /| / / __ \/ _ \/ _ \/ /  / __/
+    || |/ |/ / /_/ / , _/ // / /__/ _/  
+    ||__/|__/\____/_/|_/____/____/___/
+    |
     |=============MENU PRINCIPAL==========  
     |*1.CAMBIAR LENGUAJE DE LAS PALABRAS
     |*2.CAMBIAR USUARIO
@@ -101,7 +107,6 @@ fun showMenu(language: String, userLoaded: String) {
     |*0.COMENZAR A JUGAR
     |=====================================
     """.trimMargin()
-
   println(menu)
   printCurrentState(language, userLoaded)
   println("> Escoge una opción: ")
@@ -125,4 +130,21 @@ fun printHistory(wordsData: MutableList<MutableList<String>>) {
   for (wordData in wordsData) {
     println("PALABRA ${wordData[0]} acertada en intento ${wordData[2]}")
   }
+}
+
+/**
+ * S'encarrega d'imprimir per terminal els usuaris del sistema.
+ */
+fun printUsers() {
+  val users = File("./users/")
+  if (users.exists()) {
+    println("Listando usuarios disponibles.")
+    //Mostrem tots els usuaris de tots els fitxers d'usuaris (si escau).
+    for (userFile in users.listFiles()!!) {
+      if (userFile.length() > 0) { //Si el fitxer d'usuaris té contingut.
+        println(userFile.readText())
+      }
+    }
+  }
+
 }

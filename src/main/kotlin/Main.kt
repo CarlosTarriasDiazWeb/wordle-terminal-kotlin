@@ -25,16 +25,13 @@ fun main() {
 
   //Càrrega del primer usuari registrat.
   var userLoaded = loadUser("./users/")
-
   //Sortim del programa si hi ha cap error carregant l'usuari.
   if (userLoaded.isEmpty()) exitProcess(-1)
 
   //Bucle principal del joc
   do {
-
     println("Se ha cargado el usuario $userLoaded")
     var userData = loadData("./history/Hist${userLoaded}.txt", "hist")
-
     //Sortim del programa si hi ha cap error carregant les dades estadístiques (el fitxer ha de contenir dades).
     if (userData.isEmpty()) exitProcess(-1)
 
@@ -54,8 +51,8 @@ fun main() {
 
     //Hem de tenir en compte que l'usuari pot haver jugat amb unes quantes paraules en partides anteriors i no volem que ens toquin una altra vegada.
     updateDictionary(wordsHistory, dictionary)
-
-    println(dictionary) //debug
+    if (dictionary.all { it == "" }) println("No puedes jugar más palabras en este lenguaje!") //Missatge informatiu si l'usuari ha jugat totes les paraules del llenguatge actual.
+    //println(dictionary) //debug
 
     var userOptionMenu: Int
     do {
@@ -69,8 +66,10 @@ fun main() {
           language = changeLanguage(language, newLanguageSelected, dictionary)
           wordsHistory = loadData("./savedata/${language}${userLoaded}.txt", "save")
           updateDictionary(wordsHistory, dictionary)
+          if (dictionary.all { it == "" }) println("No puedes jugar más palabras en este lenguaje!") //Missatge informatiu si l'usuari ha jugat totes les paraules del llenguatge actual.
         }
         2 -> { //Canvi d'usuari (fa falta recarregar el diccionari corresponent i carregar les dades de guardat del usuari seleccionat).
+          printUsers() //Mostrem al jugador els usuaris disponibles.
           println("Introduce el nombre de usuario al que quieras cambiar:")
           val newUserSelected = readln().trim().lowercase()
           userLoaded = changeUser("./users/", userLoaded, newUserSelected)
@@ -84,28 +83,33 @@ fun main() {
           totalWords = userData[2][0].toInt()
           wordsHistory = loadData("./savedata/${language}${userLoaded}.txt", "save")
           updateDictionary(wordsHistory, dictionary)
+          if (dictionary.all { it == "" }) println("No puedes jugar más palabras en este lenguaje!") //Missatge informatiu si l'usuari ha jugat totes les paraules del llenguatge actual.
         }
         3 -> { //Mostra les paraules encertades en l'idioma actual.
           println("Mostrando histórico de palabras acertadas:")
           printHistory(wordsHistory)
         }
-        0 -> println("Comenzando juego...")
+        0 -> println("Comenzando WORDLE...")
         else -> println("No existe esta opción. Vuélvelo a intentar:")
       }
     }while(userOptionMenu != 0) //No sortim del menú de joc mentre no començem una partida.
 
+    if (dictionary.all { it == "" }) { //No hem de deixar que l'usuari jugui una partida si ja ha jugat totes les paraules d'un llengutge.
+      println("Diccionario de palabras vacío, apagando WORDLE...")
+      exitProcess(0)
+    }
     do {
       randomWord = getRandomWord(dictionary)
     }while(randomWord.isEmpty()) //Anem seleccionant una paraula del diccionari fins que escollim una que no estigui buïda.
 
-    //Marquem la paraula com a buïda per no tornar a seleccionar-la
+    //Marquem la paraula com a buïda per no tornar a seleccionar-la.
+    //Capitalitzem la paraula per a que coincideixi exactament amb el format de les paraules en el arxiu de lectura.
     val accessIndex = dictionary.indexOf(randomWord.lowercase()
       .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
-    dictionary[accessIndex] = "" //Capitalitzem la paraula per a que coincideixi exactament amb el format de les paraules en el arxiu de lectura.
+    dictionary[accessIndex] = ""
 
     //Disminuim el nombre total de paraules del joc.
     totalWords--
-
     println(randomWord) //debug
 
     //Setejem intents inicials per a la nova partida.
@@ -114,20 +118,15 @@ fun main() {
 
     //Bucle de la partida.
     do{
-
       println("Te quedan ${6 - (numTries)} intentos")
 
       guessWord = insertWord()
-
       correctLetters = printWord(guessWord, randomWord, colors)
-
       numTries++
-
       playerWins = playerWins(correctLetters)
 
       if (playerWins) { //Si el jugador encerta la paraula.
         println("Enhorabuena has ganado!")
-
         //Incrementem el comptador de paraules encertades y el de la ratxa actual.
         continuousGuessedWords++
         numberOfTotalGuessedWords++
@@ -147,7 +146,6 @@ fun main() {
 
     //Actualitzem el nombre de partides guanyades.
     currentNumberOfPlays++
-
     //Calculem nombre de paraules encertades respecte tot el diccionari de paraules.
     wordsPercentage = (numberOfTotalGuessedWords/totalWords.toDouble())*100.0
 
@@ -168,7 +166,6 @@ fun main() {
     )
 
     showGameHistogram(medianOfTries, numOfTriesAccomulate, colors, numberOfTotalGuessedWords)
-
     userOption = processUserInput(totalWords)
 
   }while(userOption == 1 && totalWords > 0) //Seguim jugant mentre el jugador ho indiqui i quedin paraules per jugar.
