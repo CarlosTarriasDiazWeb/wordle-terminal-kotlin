@@ -8,6 +8,7 @@ $dokka.location:/PrintUtilitiesKt/printChar/#kotlin.String?#kotlin.String?#kotli
 $dokka.location:/PrintUtilitiesKt/printCurrentState/#kotlin.String#kotlin.String/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-print-utilities-kt/print-current-state.html
 $dokka.location:/PrintUtilitiesKt/printHistory/#kotlin.collections.MutableList[kotlin.collections.MutableList[kotlin.String]]/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-print-utilities-kt/print-history.html
 $dokka.location:/PrintUtilitiesKt/printLoseMessage/#kotlin.String/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-print-utilities-kt/print-lose-message.html
+$dokka.location:/PrintUtilitiesKt/printUsers/#/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-print-utilities-kt/print-users.html
 $dokka.location:/PrintUtilitiesKt/showGameHistogram/#kotlin.DoubleArray#kotlin.IntArray#kotlin.collections.MutableMap[kotlin.String,kotlin.String]#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-print-utilities-kt/show-game-histogram.html
 $dokka.location:/PrintUtilitiesKt/showGameStatistics/#kotlin.Int#kotlin.Int#kotlin.Double#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-print-utilities-kt/show-game-statistics.html
 $dokka.location:/PrintUtilitiesKt/showMenu/#kotlin.String#kotlin.String/PointingToDeclaration/-m3_-u-f1_-p-t_-tarrias-carlos/[root]/-print-utilities-kt/show-menu.html
