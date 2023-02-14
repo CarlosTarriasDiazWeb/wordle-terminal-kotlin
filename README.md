@@ -29,46 +29,57 @@ totes les lletres de l’abecedari i sense possibilitat de repetició.
 - **Sistema d'usuaris i persistència de dades**:
   - Al carregar el joc iniciem a un jugador per defecte que tenim dins del sistema. Si no tenim cap usuari registrat demanem al usuari que 
   creï un de nou. 
-    > El directori __users__ conté un nom d'usuari per cada línia.
+    > El directori *__users__* conté un arxiu (poden ser varis) on hi ha un nom d'usuari per cada línia. Per defecte, només hi ha un sol arxiu anomenat *users.txt*
+  
+    > Si volem afegir un nou usuari al sistema només cal afegir una nova línia amb el nom d'usuari que desitjem a aquest fitxer.
   - Cada usuari del sistema té associades dades d'historial de paraules encertades, i dades de guardat que contenen les estadístiques 
   que ha anat obtenint el jugador al llarg de les seves partides.  
   - **Historial de paraules** 
     - Utilitzem el directori _savedata_ per emmagatzemar les paraules encertades. Cal destacar que **per cada llenguatge (ES-EN) 
     existeix un fitxer associat per a cada usuari**. 
-      - > Si tenim l'usuari _carlos24_ llavors dins de la carpeta _savedata_ tenim EScarlos24.txt i ENcarlos24.txt  
+      - > Si tenim l'usuari _carlos24_ llavors dins de la carpeta _savedata_ tenim *EScarlos24.txt* i *ENcarlos24.txt*  
       - > Cada línia del fitxer está format per tres camps separats per comes: la paraula encertada, l'index on es troba 
       la paraula en el seu respectiu diccionari, i el nombre d'intents que s'han necessitat per encertar-la.
   - **Dades de guardat**
     - Utilitzem el directori _history_ per emmagatzemar les dades estadístiques de cada usuari. Cada usuari té associat només 
     un fitxer d'estadístiques.
-      - > Si tenim l'usuari john33 llavors dins de a carpeta _history_ hi ha Histjohn33.txt
+      - > Si tenim l'usuari *john33* llavors dins de a carpeta _history_ hi ha *Histjohn33.txt*
       - Tenim sempre tres línies al fitxer:
           - 1era línia : valors de estadístiques separats per comes.
           - 2ona línia : valors acomulats d'intents separats per comes.
           - 3era línia : nombre de paraules totals amb que es pot jugar encara.
 - **Menú de joc**:
-   - Al inici del joc, i al inici d'una nova partida, mostrem al usuari un menú de joc amb les següents funcionalitats:
-     - Canviar el llenguatge de les paraules
-     - Canviar l'usuari actual
-     - Mostrar les paraules encertades en el llenguatge actual.
-     - Començar a jugar.
+   - Al inici del joc, i al inici d'una nova partida (si el jugador decideix seguir jugant), mostrem al usuari un menú de joc amb les següents funcionalitats:
+     - **Canviar el llenguatge de les paraules**
+       - Permet canviar d'idioma espanyol (introduir ES) a idioma anglès (introduir EN) o viceversa. Si l'idioma que especifiquem
+       no existeix (o posem el mateix que està configurat) es manté el llenguatge que hi havia en el moment
+       de fer el canvi.
+     - **Canviar l'usuari actual**
+       - Permet canviar l'usuari actual del sistema.Si l'usuari no existeix al sistema es manté el que hi havia 
+       en el moment de fer el canvi.
+     - **Mostrar les paraules encertades en el llenguatge actual**
+       - Ensenya al usuari per pantalla les paraules que ha encertat en el idioma configurat en aquell moment, més 
+       el número de l'intent en què ha encertat la paraula.
+     - **Començar a jugar**
+       - Inicia una partida de Wordle.
 - **Pintar els caràcters**: 
   - Es fa servir el codi ANSI dels colors verd 
-    i groc en els respectius caràcters en mostrar el resultat en cada intent.   
+    i groc en els respectius caràcters per mostrar el resultat en cada intent.
+  - Tenim en compte paraules amb dues lletres repetides.
 - **Joc Multipartida**:
   - S'ha afegit un bucle extern per permetre que el jugador pugui jugar una altra partida amb una altra paraula
-  aleatòria que hi hagi al fitxer extern, si així ho desitja. Ara hem tingut en compte el nombre paraules restants al diccionari
+  no jugada que hi hagi al fitxer extern, si així ho desitja. Ara hem tingut en compte el nombre paraules restants al diccionari
   de joc, de manera que si no en queden, el joc termina automàticament.
       > Les paraules totals del joc són totes les paraules disponibles **en tots els llenguatges que permet el joc** (en aquest cas 218 paraules).  
 - **Estadística del joc**:
-  - **Els valors estadístics estan calculats respecte les paraules totals del joc**. 
+  - **Els valors estadístics estan calculats respecte les paraules de tots els llenguatges**. 
   - Al final de cada partida el joc ens mostra:
-    - La quantitat de paraules resoltes: s'ha utilitzat una variable que va incrementant cada vegada que el jugador 
+    - **La quantitat de paraules resoltes**: s'ha utilitzat una variable que va incrementant cada vegada que el jugador 
     encerta una paraula del diccionari.
-    - La quantitat de paraules no jugades: correspon al total de paraules del diccionari (218) menys el nombre de paraules
+    - **La quantitat de paraules no jugades**: correspon al total de paraules del diccionari (218) menys el nombre de paraules
     encertades.
-    - El percentatge de paraules que resolem: es calcula a partir del total de paraules del diccionari.
-    - Mitjana d'intents:
+    - **El percentatge de paraules que resolem**: es calcula a partir del total de paraules del diccionari.
+    - **Mitjana d'intents**:
       - S'ha creat un array estàtic que en cada posició _i-1_ té el nombre de vegades que ha encertat una paraula
       en l'intent _i_ .
       - S'ha creat un array estàtic que en cada posició _i_ conté la mitjana de l'intent _i_ calculada a partir del número de partides
@@ -77,17 +88,14 @@ totes les lletres de l’abecedari i sense possibilitat de repetició.
       mitjanes d'intents al jugador després de cada partida. Mostrant al final els percentatges emmagatzemats
       al array de mitjes. S'ha corretgit que es faci la mitjà respecte al nombre de paraules encertades i que només la faci
       quan el jugador a encertat almenys 1 paraula.
-    - Millor ratxa de paraules encertades:
-      - Hem anat incrementant una variable cada vegada que el jugador guanyava i en una altra variable 
+    - **Millor ratxa de paraules encertades**:
+      - Hem anat incrementant una variable cada vegada que el jugador guanyava la partida i en una altra variable 
       hem emmagatzemat la ratxa màxima que s'anava substituint per la ratxa actual només si aquesta 
       era major.
-    - Control de paraules del diccionari
-      - A mesura que escollíem una paraula nova, al diccionari la marcàvem com a buida ("") per indicar
-      que no la tornaríem a escollir en una altra partida. Com que tenim en compte les paraules restants al diccionari,
-      evitem que el bucle de cerca de la paraula aleatòria es faci infinit.
-      - Tenim una variable on controlem les paraules disponibles restants al diccionari. Decrementem aquest 
-      comptador de paraules restants cada vegada que el jugador termina una partida.
-
+- **Control de paraules del diccionari**
+  - A mesura que escollíem una paraula nova, al diccionari la marcàvem com a buida ("") per indicar
+  que no la tornaríem a escollir en una altra partida. Com que tenim en compte les paraules restants al diccionari,
+  evitem que el bucle de cerca de la paraula aleatòria es faci infinit.
 ## Backlog
   - **Millores i correccions**
     - Ara l'estadística només es mostra quan el jugador ha encertat com a mínim una paraula.
@@ -95,6 +103,10 @@ totes les lletres de l’abecedari i sense possibilitat de repetició.
     - Les variables del joc també s'han canviat del mòdul principal a un fitxer secundari per afavorir la claredat del codi principal. 
     - La funcionalitat d'introduir una paraula s'ha modificat per a que sigui més amigable per al usuari.
     - S'ha modificat l'algorisme per pintar els caràcters, de forma que ara es cobreixen més casos límits (corregint els bugs que teniem fins ara en aquesta part) i ens estalviem l'us d'un diccionari d'ocurrències auxiliar.
+    - El programa finalitza amb un codi d'error si per alguna raó no hem pogut recuperar un usuari al iniciar l'execució.
+    - El programa finalitza amb un codi d'error si per alguna raó no pot carregar o crear correctament les dades estadístiques 
+    d'un usuari al iniciar l'execució.
+    - Prescindim de les funcions del diccionari de ocurrència ja que aquest ja no s'utilitza.
   - **Modularització del programa**.
     - Les funcionalitats esmentades s'han modularitzat en funcions. Per una banda, tenim les funcions que controlen la lògica
     del joc, i, per altra banda, tenim les funcions auxiliars per mostrar dades (paraules, estadístiques del joc,...) al terminal.

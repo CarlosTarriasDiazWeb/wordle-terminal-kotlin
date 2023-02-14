@@ -110,7 +110,7 @@ fun main() {
 
     //Disminuim el nombre total de paraules del joc.
     totalWords--
-    println(randomWord) //debug
+    //println(randomWord) //debug
 
     //Setejem intents inicials per a la nova partida.
     numTries = 0
